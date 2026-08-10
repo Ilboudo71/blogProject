@@ -14,4 +14,12 @@ class Product extends Model
         'type_produits',
         'photo'
     ];
+
+
+    // Les relations entre les produits et les utilisateurs
+            public function user()
+        {
+            return $this->belongsTo(User::class);
+        }
+        
 }

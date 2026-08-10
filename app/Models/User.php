@@ -7,6 +7,8 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Filament\Panel;
+use Filament\Models\Contracts\FilamentUser;
 
 class User extends Authenticatable
 {
@@ -26,6 +28,7 @@ class User extends Authenticatable
         'first_name',
         'number_phone',
         'email',
+        'role',
         'password',
     ];
 
@@ -51,4 +54,25 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    // Pour verifier si l'utilisateur est un administrateur ou un utilisateur normal
+
+
+     public function canAccessPanel(Panel $panel): bool
+    {
+        return match ($panel->getId()) {
+            'admin' => $this->role === 'admin',
+            'user' => $this->role === 'user',
+            default => false,
+        };
+    }
+
+            public function products()
+        {
+            return $this->hasMany(Product::class);
+        }
+
+
+
 }

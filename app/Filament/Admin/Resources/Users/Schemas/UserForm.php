@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources\Users\Schemas;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 
 class UserForm
 {
@@ -28,6 +29,13 @@ class UserForm
                 TextInput::make('password')
                     ->label('Password')
                     ->password()
+                    ->required(),
+                Select::make('role')
+                    ->label('Role')
+                    ->options([
+                        'admin' => 'Administrateur',
+                        'user' => 'Utilisateur',
+                    ])
                     ->required(),
                 FileUpload::make('photo')
                     ->label('Photo')
