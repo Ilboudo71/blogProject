@@ -10,6 +10,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'price',
+        'user_id',
         'descripton',
         'type_produits',
         'photo'
@@ -21,5 +22,5 @@ class Product extends Model
         {
             return $this->belongsTo(User::class);
         }
-        
+
 }

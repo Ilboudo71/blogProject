@@ -13,6 +13,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class ProduitsResource extends Resource
 {
@@ -38,6 +40,18 @@ class ProduitsResource extends Resource
             //
         ];
     }
+
+    // Filtrer les produits pour n'afficher que ceux appartenant à l'utilisateur connecté
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('user_id', Auth::id());
+    }
+
+     
+
+
+    //Liste des pages pour les produits
 
     public static function getPages(): array
     {
