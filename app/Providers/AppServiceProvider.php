@@ -8,6 +8,7 @@ use App\Http\Responses\RegistrationResponse;
 use Filament\Auth\Http\Responses\Contracts\LoginResponse as LoginResponseContract;
 use Filament\Auth\Http\Responses\Contracts\RegistrationResponse as RegistrationResponseContract;
 use Filament\Auth\Notifications\ResetPassword as FilamentResetPasswordNotification;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        //
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
