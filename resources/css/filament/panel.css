@@ -1,0 +1,255 @@
+/* Vitrine — contraste layout Filament (topbar / sidebar / main) */
+
+.fi-body {
+    background: #e7eef0 !important;
+}
+
+/* --- NAV / TOPBAR --- */
+.fi-topbar-ctn {
+    z-index: 40;
+}
+
+.fi-topbar {
+    background: linear-gradient(180deg, #f4fbf9 0%, #e7f5f2 100%) !important;
+    color: #134e4a !important;
+    border-bottom: 1px solid rgba(15, 118, 110, 0.14) !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    box-shadow: 0 8px 22px rgba(15, 118, 110, 0.08) !important;
+}
+
+.fi-topbar .fi-logo,
+.fi-topbar .fi-topbar-item-label,
+.fi-topbar .fi-icon-btn,
+.fi-topbar .fi-icon,
+.fi-topbar .fi-topbar-item-btn {
+    color: #134e4a !important;
+}
+
+.fi-topbar .fi-topbar-item-btn:hover,
+.fi-topbar .fi-topbar-item.fi-active .fi-topbar-item-btn,
+.fi-topbar .fi-icon-btn:hover {
+    background: rgba(15, 118, 110, 0.1) !important;
+}
+
+.fi-topbar .fi-badge {
+    color: #0f766e;
+    background: #d9f5f1;
+}
+
+/* --- ASIDE / SIDEBAR --- */
+.fi-sidebar,
+.fi-sidebar.fi-sidebar-open,
+.dark .fi-sidebar,
+.fi-body-has-topbar .fi-sidebar,
+html.fi .fi-sidebar {
+    background: #f7fbfa !important;
+    background-color: #f7fbfa !important;
+}
+
+.fi-sidebar.fi-sidebar-open {
+    box-shadow: inset -1px 0 0 rgba(15, 118, 110, 0.1);
+}
+
+.fi-sidebar-header,
+.fi-sidebar-header-ctn {
+    background: #eef8f6 !important;
+    border-bottom: 1px solid rgba(15, 118, 110, 0.1);
+}
+
+.fi-sidebar .fi-sidebar-header .fi-logo,
+.fi-sidebar .fi-sidebar-group-label,
+.fi-sidebar .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item-btn {
+    color: #1f3d39 !important;
+}
+
+.fi-sidebar .fi-sidebar-group-label {
+    color: #5b7873 !important;
+}
+
+.fi-sidebar .fi-sidebar-item-btn > .fi-icon,
+.fi-sidebar .fi-sidebar-group-btn .fi-icon,
+.fi-sidebar .fi-sidebar-group-collapse-btn .fi-icon,
+.fi-sidebar .fi-icon {
+    color: #0f766e !important;
+}
+
+.fi-sidebar .fi-sidebar-item-btn {
+    border-radius: 0.75rem;
+}
+
+.fi-sidebar .fi-sidebar-item-btn:hover,
+.fi-sidebar .fi-sidebar-group-btn:hover,
+.fi-sidebar .fi-sidebar-group-dropdown-trigger-btn:hover {
+    background: rgba(15, 118, 110, 0.08) !important;
+}
+
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    background: rgba(15, 118, 110, 0.14) !important;
+}
+
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
+    color: #0f766e !important;
+}
+
+.fi-sidebar-nav {
+    padding-inline: 0.65rem;
+    padding-block: 0.75rem;
+}
+
+/* --- MAIN : occupe tout l'espace restant --- */
+.fi-layout {
+    align-items: stretch;
+    min-height: calc(100dvh - 4rem);
+    width: 100%;
+}
+
+.fi-main-ctn,
+.fi-body .fi-main-ctn,
+.fi-body-has-sidebar-collapsible-on-desktop .fi-main-ctn,
+.fi-body-has-topbar .fi-main-ctn {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: calc(100dvh - 4rem) !important;
+    background: #e7eef0 !important;
+    opacity: 1 !important;
+}
+
+.fi-main,
+.fi-main.fi-width-7xl,
+.fi-main.fi-width-full {
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 100% !important;
+    margin-inline: 0 !important;
+    padding-top: 1.25rem !important;
+    padding-bottom: 2rem !important;
+}
+
+.fi-page {
+    width: 100%;
+}
+
+.fi-header-heading {
+    color: #102823 !important;
+}
+
+.fi-simple-layout {
+    background:
+        radial-gradient(900px 420px at 15% 0%, rgba(15, 118, 110, 0.18), transparent 55%),
+        linear-gradient(180deg, #e7eef0 0%, #dfe8ea 100%);
+}
+
+.fi-simple-main {
+    border: 1px solid rgba(16, 40, 35, 0.08);
+    box-shadow: 0 18px 50px rgba(16, 40, 35, 0.1);
+}
+
+/* Welcome widget */
+.fi-welcome-widget .fi-section-content {
+    padding: 0 !important;
+}
+
+.fi-welcome-inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.15rem 1.25rem;
+    background:
+        linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(14, 116, 144, 0.08)),
+        #ffffff;
+    border-radius: 0.9rem;
+}
+
+.fi-welcome-avatar {
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 999px;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(145deg, #0f766e, #0e7490);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.fi-welcome-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fi-welcome-eyebrow {
+    margin: 0;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #0f766e;
+    font-weight: 700;
+}
+
+.fi-welcome-heading {
+    margin: 0.2rem 0 0;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    color: #102823;
+}
+
+.fi-welcome-heading span {
+    color: #0f766e;
+}
+
+.fi-welcome-text {
+    margin: 0.35rem 0 0;
+    color: #4d635e;
+    font-size: 0.95rem;
+}
+
+/* Sidebar logout */
+.fi-sidebar-logout {
+    margin-top: auto;
+    padding: 0.85rem 0.85rem 1.1rem;
+    border-top: 1px solid rgba(15, 118, 110, 0.12);
+}
+
+.fi-sidebar-logout-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid rgba(15, 118, 110, 0.16);
+    border-radius: 0.85rem;
+    background: #ffffff;
+    color: #0f766e;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.fi-sidebar-logout-btn svg {
+    width: 1.15rem;
+    height: 1.15rem;
+}
+
+.fi-sidebar-logout-btn:hover {
+    background: rgba(248, 113, 113, 0.12);
+    border-color: rgba(220, 38, 38, 0.28);
+    color: #b91c1c;
+    transform: translateY(-1px);
+}
+
+.fi-sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+}

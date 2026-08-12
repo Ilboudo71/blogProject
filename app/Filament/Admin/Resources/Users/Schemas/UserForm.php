@@ -2,10 +2,11 @@
 
 namespace App\Filament\Admin\Resources\Users\Schemas;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 
 class UserForm
 {
@@ -13,35 +14,59 @@ class UserForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->label('Name')
-                    ->required(),
-                TextInput::make('first_name')
-                    ->label('First Name')
-                    ->required(),
-                TextInput::make('number_phone')
-                    ->label('Number Phone')
-                    ->required(),
-                TextInput::make('email')
-                    ->label('Email')
-                    ->email()
-                    ->required(),
-                TextInput::make('password')
-                    ->label('Password')
-                    ->password()
-                    ->required(),
-                Select::make('role')
-                    ->label('Role')
-                    ->options([
-                        'admin' => 'Administrateur',
-                        'user' => 'Utilisateur',
-                    ])
-                    ->required(),
-                FileUpload::make('photo')
-                    ->label('Photo')
-                    ->image()
-                    ->directory('users')
-                    ->disk('public')    
+                Section::make('Profil')
+                    ->columns(2)
+                    ->schema([
+                        TextInput::make('first_name')
+                            ->label('Prénom')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('name')
+                            ->label('Nom')
+                            ->required()
+                            ->maxLength(255),
+                        TextInput::make('email')
+                            ->label('E-mail')
+                            ->email()
+                            ->required()
+                            ->unique(ignoreRecord: true),
+                        TextInput::make('number_phone')
+                            ->label('Contact (téléphone)')
+                            ->tel()
+                            ->required(),
+                        TextInput::make('locality')
+                            ->label('Localité')
+                            ->placeholder('Ville, quartier…')
+                            ->required()
+                            ->maxLength(255),
+                        Select::make('role')
+                            ->label('Rôle')
+                            ->options([
+                                'admin' => 'Administrateur',
+                                'user' => 'Vendeur',
+                            ])
+                            ->required()
+                            ->native(false),
+                        TextInput::make('password')
+                            ->label('Mot de passe')
+                            ->password()
+                            ->revealable()
+                            ->dehydrated(fn (?string $state): bool => filled($state))
+                            ->required(fn (string $operation): bool => $operation === 'create')
+                            ->helperText(fn (string $operation): ?string => $operation === 'edit'
+                                ? 'Laissez vide pour conserver le mot de passe actuel.'
+                                : null),
+                        FileUpload::make('photo')
+                            ->label('Photo')
+                            ->image()
+                            ->directory('users')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->avatar()
+                            ->imageEditor()
+                            ->circleCropper()
+                            ->columnSpanFull(),
+                    ]),
             ]);
     }
 }
