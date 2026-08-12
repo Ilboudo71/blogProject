@@ -15,6 +15,7 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use UnitEnum;
 
 class ProduitsResource extends Resource
 {
@@ -22,7 +23,17 @@ class ProduitsResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'ProductUser';
+    protected static ?string $navigationLabel = 'Mes produits';
+
+    protected static ?string $modelLabel = 'produit';
+
+    protected static ?string $pluralModelLabel = 'produits';
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Catalogue';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {
@@ -36,22 +47,14 @@ class ProduitsResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
-    // Filtrer les produits pour n'afficher que ceux appartenant à l'utilisateur connecté
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
             ->where('user_id', Auth::id());
     }
-
-     
-
-
-    //Liste des pages pour les produits
 
     public static function getPages(): array
     {

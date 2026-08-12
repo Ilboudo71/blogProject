@@ -2,59 +2,109 @@
 
 namespace App\Filament\Admin\Resources\Products\Tables;
 
+use App\Models\Product;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Table;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\IconColumn;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\ImageColumn;
-use Filament\Actions\Action;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
-
+use Filament\Tables\Table;
 
 class ProductsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
-                TextColumn::make('id')->searchable(),
                 ImageColumn::make('photo')
-                ->imageHeight(40)
-                ->circular()->disk('public'),
-                TextColumn::make('name')->label("Nom du produit")->searchable()->sortable(),
-                TextColumn::make('price')->sortable(),
-                TextColumn::make('type_produits')->label("Type de produits")->searchable(),
+                    ->label('Photo')
+                    ->imageHeight(44)
+                    ->circular()
+                    ->disk('public'),
+                TextColumn::make('name')
+                    ->label('Produit')
+                    ->searchable()
+                    ->sortable()
+                    ->weight('medium'),
+                TextColumn::make('user.name')
+                    ->label('Vendeur')
+                    ->placeholder('—')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('price')
+                    ->label('Prix')
+                    ->money('XOF')
+                    ->sortable(),
+                TextColumn::make('type_produits')
+                    ->label('Catégorie')
+                    ->badge()
+                    ->formatStateUsing(fn (?string $state): string => Product::typeLabels()[$state] ?? (string) $state),
+                TextColumn::make('status')
+                    ->label('Statut')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => $state === Product::STATUS_PUBLISHED ? 'Publié' : 'Brouillon')
+                    ->color(fn (string $state): string => $state === Product::STATUS_PUBLISHED ? 'success' : 'warning'),
+                TextColumn::make('views_count')
+                    ->label('Vues')
+                    ->sortable()
+                    ->alignEnd(),
+                TextColumn::make('likes_count')
+                    ->label('Likes')
+                    ->sortable()
+                    ->alignEnd()
+                    ->badge()
+                    ->color('danger')
+                    ->icon('heroicon-m-heart'),
                 TextColumn::make('created_at')
-                ->dateTime()
-                ->sortable(),
-             
+                    ->label('Créé le')
+                    ->dateTime('d/m/Y')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->label('Statut')
+                    ->options([
+                        Product::STATUS_DRAFT => 'Brouillon',
+                        Product::STATUS_PUBLISHED => 'Publié',
+                    ]),
+                SelectFilter::make('type_produits')
+                    ->label('Catégorie')
+                    ->options(Product::typeLabels()),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                Action::make('publish')
+                    ->label('Publier')
+                    ->icon('heroicon-o-globe-alt')
+                    ->color('success')
+                    ->visible(fn (Product $record): bool => ! $record->isPublished())
+                    ->action(function (Product $record): void {
+                        $record->publish();
+                        Notification::make()->title('Produit publié')->success()->send();
+                    }),
+                Action::make('unpublish')
+                    ->label('Dépublier')
+                    ->icon('heroicon-o-eye-slash')
+                    ->color('warning')
+                    ->visible(fn (Product $record): bool => $record->isPublished())
+                    ->action(function (Product $record): void {
+                        $record->unpublish();
+                        Notification::make()->title('Produit dépublié')->success()->send();
+                    }),
+                ViewAction::make()->label('Voir'),
+                EditAction::make()->label('Modifier'),
+                DeleteAction::make()->label('Supprimer'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                DeleteBulkAction::make(),
+                    DeleteBulkAction::make(),
                 ]),
-            ])
-            ->filters([
-            SelectFilter::make('type_produits')
-                ->options([
-                    'hygiene' => 'Produits d\'hygiène',
-                    'alimentaire' => 'Produits alimentaires',
-                    'electronique' => 'Électronique',
-                    'vetement' => 'Vêtements',
-                    'autres'=> 'Autres types de produits',
-                ]),
-             ]);
+            ]);
     }
 }
