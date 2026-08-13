@@ -81,6 +81,7 @@ class DatabaseSeeder extends Seeder
                     'price' => $sample['price'],
                     'type_produits' => $sample['type_produits'],
                     'description' => $sample['description'],
+                    'photo' => null,
                     'status' => Product::STATUS_PUBLISHED,
                     'published_at' => now(),
                     'views_count' => 0,

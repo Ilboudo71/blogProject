@@ -38,7 +38,7 @@ echo "User count: ${USER_COUNT} | Product count: ${PRODUCT_COUNT}"
 
 if [ "${FORCE_SEED:-false}" = "true" ] || [ "${USER_COUNT}" = "0" ] || [ "${PRODUCT_COUNT}" = "0" ]; then
   echo "Seeding admin, seller and sample products..."
-  php artisan db:seed --force
+  php artisan db:seed --force || echo "WARNING: seed failed (app will still start)"
 else
   echo "Data already present — skipping seed."
 fi
