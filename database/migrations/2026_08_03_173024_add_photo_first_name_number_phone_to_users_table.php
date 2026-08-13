@@ -8,31 +8,36 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            if (! Schema::hasColumn('users', 'photo')) {
+        if (! Schema::hasColumn('users', 'photo')) {
+            Schema::table('users', function (Blueprint $table) {
                 $table->string('photo')->nullable();
-            }
+            });
+        }
 
-            if (! Schema::hasColumn('users', 'first_name')) {
+        if (! Schema::hasColumn('users', 'first_name')) {
+            Schema::table('users', function (Blueprint $table) {
                 $table->string('first_name')->nullable();
-            }
+            });
+        }
 
-            if (! Schema::hasColumn('users', 'number_phone')) {
+        if (! Schema::hasColumn('users', 'number_phone')) {
+            Schema::table('users', function (Blueprint $table) {
                 $table->string('number_phone')->nullable();
-            }
-        });
+            });
+        }
     }
 
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $columns = collect(['photo', 'first_name', 'number_phone'])
-                ->filter(fn (string $column) => Schema::hasColumn('users', $column))
-                ->all();
+        $columns = collect(['photo', 'first_name', 'number_phone'])
+            ->filter(fn (string $column) => Schema::hasColumn('users', $column))
+            ->values()
+            ->all();
 
-            if ($columns !== []) {
+        if ($columns !== []) {
+            Schema::table('users', function (Blueprint $table) use ($columns) {
                 $table->dropColumn($columns);
-            }
-        });
+            });
+        }
     }
 };
