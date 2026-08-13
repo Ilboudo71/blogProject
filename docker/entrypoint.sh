@@ -32,5 +32,13 @@ php artisan view:cache
 echo "Running migrations..."
 php artisan migrate --force
 
+USER_COUNT="$(php artisan tinker --execute='echo App\Models\User::query()->count();' 2>/dev/null | tr -d '\r' | tail -n 1)"
+if [ "${USER_COUNT}" = "0" ]; then
+  echo "Database empty — seeding admin, seller and sample products..."
+  php artisan db:seed --force
+else
+  echo "Users already present (${USER_COUNT}) — skipping seed."
+fi
+
 echo "Starting services on port ${PORT}..."
 exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
