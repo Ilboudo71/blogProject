@@ -21,7 +21,13 @@ RUN composer install \
     --ignore-platform-reqs
 
 COPY . .
-RUN composer dump-autoload --optimize --no-dev --ignore-platform-reqs
+RUN mkdir -p \
+        storage/framework/cache \
+        storage/framework/sessions \
+        storage/framework/views \
+        storage/logs \
+        bootstrap/cache \
+    && composer dump-autoload --optimize --no-dev --ignore-platform-reqs
 
 # --------- Runtime: PHP 8.4 + Nginx ---------
 FROM php:8.4-fpm-bookworm
