@@ -32,12 +32,15 @@ php artisan view:cache
 echo "Running migrations..."
 php artisan migrate --force
 
-USER_COUNT="$(php artisan tinker --execute='echo App\Models\User::query()->count();' 2>/dev/null | tr -d '\r' | tail -n 1)"
-if [ "${USER_COUNT}" = "0" ]; then
-  echo "Database empty — seeding admin, seller and sample products..."
+USER_COUNT="$(php -r 'require "vendor/autoload.php"; $app=require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo (int) App\Models\User::query()->count();')"
+PRODUCT_COUNT="$(php -r 'require "vendor/autoload.php"; $app=require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo (int) App\Models\Product::query()->count();')"
+echo "User count: ${USER_COUNT} | Product count: ${PRODUCT_COUNT}"
+
+if [ "${FORCE_SEED:-false}" = "true" ] || [ "${USER_COUNT}" = "0" ] || [ "${PRODUCT_COUNT}" = "0" ]; then
+  echo "Seeding admin, seller and sample products..."
   php artisan db:seed --force
 else
-  echo "Users already present (${USER_COUNT}) — skipping seed."
+  echo "Data already present — skipping seed."
 fi
 
 echo "Starting services on port ${PORT}..."
