@@ -6,24 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->string('type_produits')->after('description');
-            $table->string('photo')->after('type_produits');
+            if (! Schema::hasColumn('products', 'type_produits')) {
+                $table->string('type_produits')->nullable();
+            }
+
+            if (! Schema::hasColumn('products', 'photo')) {
+                $table->string('photo')->nullable();
+            }
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            //
+            $columns = collect(['type_produits', 'photo'])
+                ->filter(fn (string $column) => Schema::hasColumn('products', $column))
+                ->all();
+
+            if ($columns !== []) {
+                $table->dropColumn($columns);
+            }
         });
     }
 };

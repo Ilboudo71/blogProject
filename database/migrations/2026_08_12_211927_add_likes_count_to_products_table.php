@@ -8,15 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->unsignedBigInteger('likes_count')->default(0)->after('views_count');
-        });
+        if (! Schema::hasColumn('products', 'likes_count')) {
+            Schema::table('products', function (Blueprint $table) {
+                $table->unsignedBigInteger('likes_count')->default(0);
+            });
+        }
     }
 
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('likes_count');
-        });
+        if (Schema::hasColumn('products', 'likes_count')) {
+            Schema::table('products', function (Blueprint $table) {
+                $table->dropColumn('likes_count');
+            });
+        }
     }
 };
