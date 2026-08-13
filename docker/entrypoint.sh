@@ -33,14 +33,13 @@ echo "Running migrations..."
 php artisan migrate --force
 
 USER_COUNT="$(php -r 'require "vendor/autoload.php"; $app=require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo (int) App\Models\User::query()->count();')"
-PRODUCT_COUNT="$(php -r 'require "vendor/autoload.php"; $app=require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo (int) App\Models\Product::query()->count();')"
-echo "User count: ${USER_COUNT} | Product count: ${PRODUCT_COUNT}"
+echo "User count: ${USER_COUNT}"
 
-if [ "${FORCE_SEED:-false}" = "true" ] || [ "${USER_COUNT}" = "0" ] || [ "${PRODUCT_COUNT}" = "0" ]; then
-  echo "Seeding admin, seller and sample products..."
+if [ "${FORCE_SEED:-false}" = "true" ] || [ "${USER_COUNT}" = "0" ]; then
+  echo "Seeding admin and seller accounts..."
   php artisan db:seed --force || echo "WARNING: seed failed (app will still start)"
 else
-  echo "Data already present — skipping seed."
+  echo "Users already present — skipping seed."
 fi
 
 echo "Starting services on port ${PORT}..."

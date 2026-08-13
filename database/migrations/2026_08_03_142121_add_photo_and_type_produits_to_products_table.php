@@ -16,7 +16,7 @@ return new class extends Migration
 
         if (! Schema::hasColumn('products', 'photo')) {
             Schema::table('products', function (Blueprint $table) {
-                $table->string('photo')->nullable();
+                $table->string('photo');
             });
         }
     }
