@@ -23,11 +23,6 @@
 
             <nav class="header-nav" aria-label="Navigation principale">
                 <a href="{{ route('marketplace.home') }}#catalogue" class="nav-link">{{ __('Catalogue') }}</a>
-                <div class="header-lang-switch" style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; font-weight: 700;">
-                    <a href="{{ route('locale.switch', 'fr') }}" style="color: {{ app()->getLocale() === 'fr' ? '#0f766e' : '#64748b' }}; text-decoration: none; padding: 0.2rem 0.4rem; border-radius: 0.35rem; background: {{ app()->getLocale() === 'fr' ? 'rgba(15,118,110,0.1)' : 'transparent' }};">FR</a>
-                    <span style="color: #cbd5e1;">|</span>
-                    <a href="{{ route('locale.switch', 'en') }}" style="color: {{ app()->getLocale() === 'en' ? '#0f766e' : '#64748b' }}; text-decoration: none; padding: 0.2rem 0.4rem; border-radius: 0.35rem; background: {{ app()->getLocale() === 'en' ? 'rgba(15,118,110,0.1)' : 'transparent' }};">EN</a>
-                </div>
                 @auth
                     <a href="{{ auth()->user()->panelHomeUrl() }}" class="btn btn-primary">{{ __('Mon espace') }}</a>
                 @else
