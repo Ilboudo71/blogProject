@@ -36,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ->registration(Register::class)
             ->passwordReset(RequestPasswordReset::class, ResetPassword::class)
             ->profile(EditProfile::class)
-            ->brandName('MarketPlace Admin')
+            ->brandName('Raaga Admin')
             ->font('Outfit')
             ->favicon(asset('favicon.ico'))
             ->maxContentWidth(Width::Full)

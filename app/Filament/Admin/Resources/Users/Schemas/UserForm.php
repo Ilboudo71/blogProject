@@ -2,9 +2,11 @@
 
 namespace App\Filament\Admin\Resources\Users\Schemas;
 
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -66,6 +68,36 @@ class UserForm
                             ->imageEditor()
                             ->circleCropper()
                             ->columnSpanFull(),
+                    ]),
+
+                Section::make('Abonnement Premium')
+                    ->description('Gestion du statut Premium pour autoriser la publication illimitée de produits.')
+                    ->columns(2)
+                    ->schema([
+                        Toggle::make('is_premium')
+                            ->label('Statut Premium actif')
+                            ->helperText('Permet de publier un nombre illimité de produits.')
+                            ->live()
+                            ->afterStateUpdated(function (bool $state, callable $set, callable $get): void {
+                                if ($state) {
+                                    if (! $get('premium_activated_at')) {
+                                        $set('premium_activated_at', now());
+                                    }
+                                    if (! $get('premium_expires_at')) {
+                                        $set('premium_expires_at', now()->addYear());
+                                    }
+                                }
+                            }),
+                        TextInput::make('premium_payment_ref')
+                            ->label('Référence de paiement (Orange Money)')
+                            ->placeholder('Ex: OM TX123456...')
+                            ->maxLength(255),
+                        DateTimePicker::make('premium_activated_at')
+                            ->label('Date d’activation')
+                            ->native(false),
+                        DateTimePicker::make('premium_expires_at')
+                            ->label('Date d’expiration (12 mois)')
+                            ->native(false),
                     ]),
             ]);
     }

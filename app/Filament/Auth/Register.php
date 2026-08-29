@@ -127,7 +127,7 @@ class Register extends BaseRegister
 
     public function getTitle(): string|\Illuminate\Contracts\Support\Htmlable
     {
-        return 'Inscription — MarketPlace';
+        return 'Inscription — Raaga';
     }
 
     public function getSubheading(): string|\Illuminate\Contracts\Support\Htmlable|null

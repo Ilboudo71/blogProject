@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'MarketPlace') — MarketPlace</title>
+    <title>@yield('title', 'Raaga') — Raaga</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com">
@@ -17,8 +17,8 @@
     <header class="site-header @yield('header_class')">
         <div class="container header-inner">
             <a href="{{ route('marketplace.home') }}" class="brand">
-                <span class="brand-mark">M</span>
-                <span class="brand-text">MarketPlace</span>
+                <span class="brand-mark">R</span>
+                <span class="brand-text">Raaga</span>
             </a>
 
             <nav class="header-nav" aria-label="Navigation principale">
@@ -42,11 +42,11 @@
             <div class="footer-grid">
                 <div class="footer-brand-col">
                     <a href="{{ route('marketplace.home') }}" class="brand footer-brand">
-                        <span class="brand-mark">M</span>
-                        <span class="brand-text">MarketPlace</span>
+                        <span class="brand-mark">R</span>
+                        <span class="brand-text">Raaga</span>
                     </a>
                     <p class="footer-copy">
-                        Plateforme pour exposer, publier et contacter les vendeurs en toute simplicité.
+                        Plateforme locale pour exposer, publier et contacter les vendeurs en toute simplicité.
                     </p>
                 </div>
 
@@ -85,7 +85,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} MarketPlace. Tous droits réservés.</p>
+                <p>&copy; {{ date('Y') }} Raaga. Tous droits réservés.</p>
                 <p>Conçu pour une mise en relation simple entre vendeurs et acheteurs.</p>
             </div>
         </div>

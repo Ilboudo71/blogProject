@@ -21,9 +21,9 @@
                 </h2>
                 <p class="fi-welcome-text">
                     @if ($user?->isAdmin())
-                        Vous êtes connecté à l’espace administration MarketPlace.
+                        Vous êtes connecté à l’espace administration Raaga.
                     @else
-                        Vous êtes connecté à votre espace vendeur MarketPlace.
+                        Vous êtes connecté à votre espace vendeur Raaga.
                     @endif
                 </p>
             </div>

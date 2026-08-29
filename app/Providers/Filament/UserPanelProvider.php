@@ -36,7 +36,7 @@ class UserPanelProvider extends PanelProvider
             ->registration(Register::class)
             ->passwordReset(RequestPasswordReset::class, ResetPassword::class)
             ->profile(EditProfile::class)
-            ->brandName('MarketPlace')
+            ->brandName('Raaga')
             ->font('Outfit')
             ->favicon(asset('favicon.ico'))
             ->maxContentWidth(Width::Full)

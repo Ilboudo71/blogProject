@@ -3,6 +3,7 @@
 namespace App\Filament\User\Widgets;
 
 use App\Models\Product;
+use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,9 @@ class SellerStatsOverview extends StatsOverviewWidget
 
     protected function getStats(): array
     {
-        $userId = Auth::id();
+        /** @var User|null $user */
+        $user = Auth::user();
+        $userId = $user?->id;
 
         $total = Product::query()->where('user_id', $userId)->count();
         $published = Product::query()->where('user_id', $userId)->published()->count();
@@ -23,7 +26,16 @@ class SellerStatsOverview extends StatsOverviewWidget
         $views = (int) Product::query()->where('user_id', $userId)->sum('views_count');
         $likes = (int) Product::query()->where('user_id', $userId)->sum('likes_count');
 
+        $isPremium = $user?->isPremium() ?? false;
+        $premiumDesc = $isPremium
+            ? ($user?->premium_expires_at ? 'Expire le '.$user->premium_expires_at->format('d/m/Y') : 'Illimité')
+            : 'Limité à 1 produit';
+
         return [
+            Stat::make('Statut Compte', $isPremium ? 'Vendeur Premium' : 'Standard Gratuit')
+                ->description($premiumDesc)
+                ->descriptionIcon($isPremium ? 'heroicon-m-sparkles' : 'heroicon-m-user')
+                ->color($isPremium ? 'success' : 'gray'),
             Stat::make('Total produits', $total)
                 ->description('Dans votre catalogue')
                 ->descriptionIcon('heroicon-m-cube')

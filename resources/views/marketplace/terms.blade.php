@@ -5,10 +5,10 @@
 @section('content')
 <section class="legal-page">
     <div class="container legal-wrap">
-        <p class="eyebrow">MarketPlace</p>
+        <p class="eyebrow">Raaga</p>
         <h1>Conditions d’utilisation</h1>
         <p class="legal-lead">
-            En utilisant MarketPlace, vous acceptez les règles suivantes destinées à garantir un usage responsable
+            En utilisant Raaga, vous acceptez les règles suivantes destinées à garantir un usage responsable
             de la plateforme.
         </p>
 
@@ -16,7 +16,7 @@
             <article>
                 <h2>1. Objet du service</h2>
                 <p>
-                    MarketPlace permet aux vendeurs de publier des annonces et aux visiteurs de consulter
+                    Raaga permet aux vendeurs de publier des annonces et aux visiteurs de consulter
                     ces annonces puis de contacter les vendeurs.
                 </p>
             </article>
@@ -38,7 +38,7 @@
                 <h2>4. Contact et échanges</h2>
                 <p>
                     Les échanges commerciaux se font directement entre acheteur et vendeur
-                    (e-mail, téléphone, WhatsApp). MarketPlace n’est pas partie aux transactions.
+                    (e-mail, téléphone, WhatsApp). Raaga n’est pas partie aux transactions.
                 </p>
             </article>
             <article>

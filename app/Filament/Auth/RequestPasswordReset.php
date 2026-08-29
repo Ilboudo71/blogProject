@@ -16,7 +16,7 @@ class RequestPasswordReset extends BaseRequestPasswordReset
 
     public function getTitle(): string|Htmlable
     {
-        return 'Réinitialiser le mot de passe — MarketPlace';
+        return 'Réinitialiser le mot de passe — Raaga';
     }
 
     protected function getEmailFormComponent(): Component

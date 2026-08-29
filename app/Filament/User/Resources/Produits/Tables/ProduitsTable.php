@@ -3,6 +3,7 @@
 namespace App\Filament\User\Resources\Produits\Tables;
 
 use App\Models\Product;
+use App\Models\User;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -14,6 +15,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class ProduitsTable
 {
@@ -86,10 +88,32 @@ class ProduitsTable
                     ->icon('heroicon-o-globe-alt')
                     ->color('success')
                     ->visible(fn (Product $record): bool => ! $record->isPublished())
-                    ->requiresConfirmation()
-                    ->modalHeading('Publier ce produit ?')
-                    ->modalDescription('Le produit sera visible sur la marketplace publique.')
+                    ->requiresConfirmation(fn (): bool => (bool) Auth::user()?->canPublishMoreProducts())
+                    ->modalHeading(fn (): string => Auth::user()?->canPublishMoreProducts()
+                        ? 'Publier ce produit ?'
+                        : 'Abonnement Premium requis')
+                    ->modalDescription(fn (): ?string => Auth::user()?->canPublishMoreProducts()
+                        ? 'Le produit sera visible sur la marketplace publique.'
+                        : 'Votre compte gratuit est limité à 1 produit publié. Passez en statut Premium (5 050 FCFA/an) pour publier des produits supplémentaires.')
+                    ->modalContent(fn (): ?\Illuminate\Contracts\View\View => Auth::user()?->canPublishMoreProducts()
+                        ? null
+                        : view('filament.modals.premium-info'))
+                    ->modalSubmitAction(fn ($action) => Auth::user()?->canPublishMoreProducts() ? $action : false)
+                    ->modalCancelActionLabel(fn (): string => Auth::user()?->canPublishMoreProducts() ? 'Annuler' : 'Fermer')
                     ->action(function (Product $record): void {
+                        /** @var User|null $user */
+                        $user = Auth::user();
+
+                        if ($user && ! $user->canPublishMoreProducts()) {
+                            Notification::make()
+                                ->title('Publication impossible')
+                                ->body('Votre compte gratuit est limité à 1 produit publié. Passez en Premium (5 050 FCFA/an) pour publier des produits en illimité.')
+                                ->warning()
+                                ->send();
+
+                            return;
+                        }
+
                         $record->publish();
 
                         Notification::make()

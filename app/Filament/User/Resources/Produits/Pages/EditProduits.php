@@ -4,9 +4,12 @@ namespace App\Filament\User\Resources\Produits\Pages;
 
 use App\Filament\User\Resources\Produits\ProduitsResource;
 use App\Models\Product;
+use App\Models\User;
 use Filament\Actions\DeleteAction;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class EditProduits extends EditRecord
 {
@@ -17,6 +20,29 @@ class EditProduits extends EditRecord
         return [
             DeleteAction::make()->label('Supprimer'),
         ];
+    }
+
+    protected function beforeSave(): void
+    {
+        /** @var Product $record */
+        $record = $this->record;
+        /** @var User|null $user */
+        $user = Auth::user();
+
+        $newStatus = $this->data['status'] ?? null;
+
+        if ($newStatus === Product::STATUS_PUBLISHED && ! $record->isPublished()) {
+            if ($user && ! $user->canPublishMoreProducts()) {
+                Notification::make()
+                    ->title('Publication impossible')
+                    ->body('Votre compte gratuit est limité à 1 produit publié. Passez au statut Premium (5 050 FCFA/an) pour publier des produits supplémentaires.')
+                    ->danger()
+                    ->persistent()
+                    ->send();
+
+                $this->halt();
+            }
+        }
     }
 
     protected function mutateFormDataBeforeSave(array $data): array

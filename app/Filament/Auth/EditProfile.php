@@ -58,6 +58,6 @@ class EditProfile extends BaseEditProfile
 
     public function getTitle(): string|\Illuminate\Contracts\Support\Htmlable
     {
-        return 'Mon profil — MarketPlace';
+        return 'Mon profil — Raaga';
     }
 }

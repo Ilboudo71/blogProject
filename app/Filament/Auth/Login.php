@@ -52,7 +52,7 @@ class Login extends BaseLogin
 
     public function getTitle(): string|Htmlable
     {
-        return 'Connexion — MarketPlace';
+        return 'Connexion — Raaga';
     }
 
     public function getSubheading(): string|Htmlable|null

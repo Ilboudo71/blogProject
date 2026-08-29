@@ -5,10 +5,10 @@
 @section('content')
 <section class="legal-page">
     <div class="container legal-wrap">
-        <p class="eyebrow">MarketPlace</p>
+        <p class="eyebrow">Raaga</p>
         <h1>Politique de confidentialité</h1>
         <p class="legal-lead">
-            Cette politique explique quelles informations sont collectées sur MarketPlace et comment elles sont utilisées.
+            Cette politique explique quelles informations sont collectées sur Raaga et comment elles sont utilisées.
             Dernière mise à jour : {{ now()->format('d/m/Y') }}.
         </p>
 

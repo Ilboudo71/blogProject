@@ -2,6 +2,7 @@
 
 namespace App\Filament\User\Pages;
 
+use App\Filament\User\Widgets\SellerPremiumBannerWidget;
 use App\Filament\User\Widgets\SellerStatsOverview;
 use App\Filament\Widgets\WelcomeWidget;
 use Filament\Pages\Dashboard as BaseDashboard;
@@ -33,6 +34,7 @@ class Dashboard extends BaseDashboard
     {
         return [
             WelcomeWidget::class,
+            SellerPremiumBannerWidget::class,
             SellerStatsOverview::class,
         ];
     }

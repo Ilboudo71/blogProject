@@ -5,10 +5,10 @@
 @section('content')
 <section class="legal-page">
     <div class="container legal-wrap">
-        <p class="eyebrow">MarketPlace</p>
+        <p class="eyebrow">Raaga</p>
         <h1>À propos</h1>
         <p class="legal-lead">
-            MarketPlace est une plateforme locale qui permet aux vendeurs d’exposer, publier et suivre leurs produits,
+            Raaga est une plateforme locale qui permet aux vendeurs d’exposer, publier et suivre leurs produits,
             et aux acheteurs de découvrir des annonces puis de contacter directement les vendeurs.
         </p>
 

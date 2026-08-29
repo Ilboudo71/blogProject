@@ -17,7 +17,7 @@
     <div class="container hero-content">
         <p class="eyebrow eyebrow--light">Marketplace locale</p>
         <h1 class="hero-title hero-title--light">
-            <span class="brand-inline brand-inline--light">MarketPlace</span>
+            <span class="brand-inline brand-inline--light">Raaga</span>
             Des produits soigneusement exposés.
         </h1>
         <p class="hero-lead hero-lead--light">

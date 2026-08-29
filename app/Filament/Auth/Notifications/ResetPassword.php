@@ -24,7 +24,7 @@ class ResetPassword extends BaseNotification
         $name = trim((string) ($notifiable->full_name ?? $notifiable->name ?? ''));
 
         return (new MailMessage)
-            ->subject('Réinitialisation de votre mot de passe — MarketPlace')
+            ->subject('Réinitialisation de votre mot de passe — Raaga')
             ->view('emails.password-reset', [
                 'url' => $url,
                 'expire' => $expire,

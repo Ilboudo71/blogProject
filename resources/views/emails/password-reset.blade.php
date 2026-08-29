@@ -14,7 +14,7 @@
                     <tr>
                         <td style="background:linear-gradient(135deg,#0f766e 0%,#0d9488 55%,#14b8a6 100%);padding:28px 32px;text-align:left;">
                             <p style="margin:0;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.82);font-weight:600;">
-                                MarketPlace
+                                Raaga
                             </p>
                             <h1 style="margin:8px 0 0;font-size:24px;line-height:1.3;color:#ffffff;font-weight:700;">
                                 Réinitialisation du mot de passe
@@ -29,7 +29,7 @@
                             </p>
                             <p style="margin:0 0 16px;font-size:15px;line-height:1.7;color:#3d524e;">
                                 Nous avons reçu une demande de réinitialisation de mot de passe pour votre compte
-                                <strong style="color:#0f766e;">MarketPlace</strong>.
+                                <strong style="color:#0f766e;">Raaga</strong>.
                             </p>
                             <p style="margin:0 0 28px;font-size:15px;line-height:1.7;color:#3d524e;">
                                 Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe.
@@ -70,7 +70,7 @@
                     <tr>
                         <td style="padding:20px 32px 28px;border-top:1px solid #e6efed;text-align:center;background-color:#fbfcfc;">
                             <p style="margin:0 0 4px;font-size:14px;font-weight:700;letter-spacing:0.02em;color:#0f766e;">
-                                MarketPlace Vitrine
+                                Raaga
                             </p>
                             <p style="margin:0;font-size:12px;line-height:1.6;color:#6b7f7a;">
                                 Des produits soigneusement exposés, une mise en relation simple et claire.
