@@ -89,6 +89,7 @@ class ProduitsTable
                     ->color('success')
                     ->visible(fn (Product $record): bool => ! $record->isPublished())
                     ->requiresConfirmation(fn (): bool => (bool) Auth::user()?->canPublishMoreProducts())
+                    ->modalWidth('lg')
                     ->modalHeading(fn (): string => Auth::user()?->canPublishMoreProducts()
                         ? 'Publier ce produit ?'
                         : 'Abonnement Premium requis')
