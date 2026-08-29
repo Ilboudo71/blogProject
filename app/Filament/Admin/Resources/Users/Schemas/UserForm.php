@@ -16,50 +16,58 @@ class UserForm
     {
         return $schema
             ->components([
-                Section::make('Profil')
+                Section::make(__('Profil'))
                     ->columns(2)
                     ->schema([
                         TextInput::make('first_name')
-                            ->label('Prénom')
+                            ->label(__('Prénom'))
                             ->required()
                             ->maxLength(255),
                         TextInput::make('name')
-                            ->label('Nom')
+                            ->label(__('Nom'))
                             ->required()
                             ->maxLength(255),
                         TextInput::make('email')
-                            ->label('E-mail')
+                            ->label(__('E-mail'))
                             ->email()
                             ->required()
                             ->unique(ignoreRecord: true),
+                        Select::make('locale')
+                            ->label(__('Langue'))
+                            ->options([
+                                'fr' => 'Français',
+                                'en' => 'English',
+                            ])
+                            ->default('fr')
+                            ->required(),
                         TextInput::make('number_phone')
-                            ->label('Contact (téléphone)')
+                            ->label(__('Contact (téléphone)'))
                             ->tel()
                             ->required(),
                         TextInput::make('locality')
-                            ->label('Localité')
-                            ->placeholder('Ville, quartier…')
+                            ->label(__('Localité'))
+                            ->placeholder(__('Ville, quartier…'))
                             ->required()
                             ->maxLength(255),
                         Select::make('role')
-                            ->label('Rôle')
+                            ->label(__('Rôle'))
                             ->options([
-                                'admin' => 'Administrateur',
-                                'user' => 'Vendeur',
+                                'admin' => __('Administrateur'),
+                                'user' => __('Vendeur'),
                             ])
                             ->required()
                             ->native(false),
                         TextInput::make('password')
-                            ->label('Mot de passe')
+                            ->label(__('Mot de passe'))
                             ->password()
                             ->revealable()
                             ->dehydrated(fn (?string $state): bool => filled($state))
                             ->required(fn (string $operation): bool => $operation === 'create')
                             ->helperText(fn (string $operation): ?string => $operation === 'edit'
-                                ? 'Laissez vide pour conserver le mot de passe actuel.'
+                                ? __('Laissez vide pour conserver le mot de passe actuel.')
                                 : null),
                         FileUpload::make('photo')
-                            ->label('Photo')
+                            ->label(__('Photo'))
                             ->image()
                             ->directory('users')
                             ->disk('public')
@@ -70,13 +78,13 @@ class UserForm
                             ->columnSpanFull(),
                     ]),
 
-                Section::make('Abonnement Premium')
-                    ->description('Gestion du statut Premium pour autoriser la publication illimitée de produits.')
+                Section::make(__('Abonnement Premium'))
+                    ->description(__('Gestion du statut Premium pour autoriser la publication illimitée de produits.'))
                     ->columns(2)
                     ->schema([
                         Toggle::make('is_premium')
-                            ->label('Statut Premium actif')
-                            ->helperText('Permet de publier un nombre illimité de produits.')
+                            ->label(__('Statut Premium actif'))
+                            ->helperText(__('Permet de publier un nombre illimité de produits.'))
                             ->live()
                             ->afterStateUpdated(function (bool $state, callable $set, callable $get): void {
                                 if ($state) {
@@ -89,14 +97,14 @@ class UserForm
                                 }
                             }),
                         TextInput::make('premium_payment_ref')
-                            ->label('Référence de paiement (Orange Money)')
+                            ->label(__('Référence de paiement (Orange Money)'))
                             ->placeholder('Ex: OM TX123456...')
                             ->maxLength(255),
                         DateTimePicker::make('premium_activated_at')
-                            ->label('Date d’activation')
+                            ->label(__('Date d’activation'))
                             ->native(false),
                         DateTimePicker::make('premium_expires_at')
-                            ->label('Date d’expiration (12 mois)')
+                            ->label(__('Date d’expiration (12 mois)'))
                             ->native(false),
                     ]),
             ]);

@@ -268,10 +268,14 @@ html.fi .fi-sidebar {
     border-radius: 1.35rem !important;
     overflow: hidden !important;
     font-size: 1rem !important;
+    max-height: calc(100vh - 2.5rem) !important;
+    display: flex !important;
+    flex-direction: column !important;
 }
 
 .fi-modal-header {
     padding: 1.25rem 1.5rem !important;
+    flex-shrink: 0 !important;
 }
 
 .fi-modal-heading {
@@ -289,6 +293,15 @@ html.fi .fi-sidebar {
 
 .fi-modal-content {
     font-size: 1rem !important;
+    overflow-y: auto !important;
+    flex: 1 1 auto !important;
+    overscroll-behavior: contain !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-bottom: 1.5rem !important;
+}
+
+.fi-modal-footer {
+    flex-shrink: 0 !important;
 }
 
 /* Filament Table & Actions font enhancement */

@@ -10,9 +10,15 @@ use Illuminate\Database\Eloquent\Builder;
 
 class AdminStatsOverview extends StatsOverviewWidget
 {
-    protected ?string $heading = 'Statistiques de la plateforme';
+    public function getHeading(): ?string
+    {
+        return __('Statistiques de la plateforme');
+    }
 
-    protected ?string $description = 'Indicateurs d’activité et suivi des abonnements Premium Raaga';
+    public function getDescription(): ?string
+    {
+        return __('Indicateurs d’activité et suivi des abonnements Premium Raaga');
+    }
 
     protected function getStats(): array
     {
@@ -42,28 +48,28 @@ class AdminStatsOverview extends StatsOverviewWidget
         $totalViews = (int) Product::query()->sum('views_count');
 
         return [
-            Stat::make('Total utilisateurs', $totalUsers)
-                ->description("{$sellersCount} vendeur(s) inscrit(s)")
+            Stat::make(__('Total utilisateurs'), $totalUsers)
+                ->description("{$sellersCount} " . __('vendeur(s) inscrit(s)'))
                 ->descriptionIcon('heroicon-m-users')
                 ->color('primary'),
 
-            Stat::make('Utilisateurs Premium', "{$premiumUsers} ({$premiumPercentage}%)")
-                ->description('Abonnements actifs (5 050 FCFA/an)')
+            Stat::make(__('Utilisateurs Premium'), "{$premiumUsers} ({$premiumPercentage}%)")
+                ->description(__('Abonnements actifs (5 050 FCFA/an)'))
                 ->descriptionIcon('heroicon-m-sparkles')
                 ->color('success'),
 
-            Stat::make('Utilisateurs non-Premium', "{$nonPremiumUsers} ({$nonPremiumPercentage}%)")
-                ->description('Comptes standards limités à 1 produit')
+            Stat::make(__('Utilisateurs non-Premium'), "{$nonPremiumUsers} ({$nonPremiumPercentage}%)")
+                ->description(__('Comptes standards limités à 1 produit'))
                 ->descriptionIcon('heroicon-m-user-minus')
                 ->color('gray'),
 
-            Stat::make('Produits publiés', $publishedProducts)
-                ->description("{$draftProducts} produit(s) en brouillon")
+            Stat::make(__('Produits publiés'), $publishedProducts)
+                ->description("{$draftProducts} " . __('produit(s) en brouillon'))
                 ->descriptionIcon('heroicon-m-globe-alt')
                 ->color('info'),
 
-            Stat::make('Vues totales', number_format($totalViews, 0, ',', ' '))
-                ->description('Sur l\'ensemble des produits exposés')
+            Stat::make(__('Vues totales'), number_format($totalViews, 0, ',', ' '))
+                ->description(__('Sur l\'ensemble des produits exposés'))
                 ->descriptionIcon('heroicon-m-eye')
                 ->color('warning'),
         ];

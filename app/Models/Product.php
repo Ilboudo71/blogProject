@@ -119,11 +119,11 @@ class Product extends Model
     public static function typeLabels(): array
     {
         return [
-            'hygiene' => 'Hygiène',
-            'alimentaire' => 'Alimentaire',
-            'electronique' => 'Électronique',
-            'vetement' => 'Vêtements',
-            'autres' => 'Autres',
+            'hygiene' => __('Hygiène'),
+            'alimentaire' => __('Alimentaire'),
+            'electronique' => __('Électronique'),
+            'vetement' => __('Vêtements'),
+            'autres' => __('Autres'),
         ];
     }
 

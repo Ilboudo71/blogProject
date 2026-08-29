@@ -26,54 +26,54 @@ class UsersTable
             ->defaultSort('created_at', 'desc')
             ->columns([
                 ImageColumn::make('photo')
-                    ->label('Photo')
+                    ->label(__('Photo'))
                     ->imageHeight(40)
                     ->circular()
                     ->disk('public'),
                 TextColumn::make('first_name')
-                    ->label('Prénom')
+                    ->label(__('Prénom'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('name')
-                    ->label('Nom')
+                    ->label(__('Nom'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('email')
-                    ->label('E-mail')
+                    ->label(__('E-mail'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('number_phone')
-                    ->label('Contact')
+                    ->label(__('Contact'))
                     ->searchable(),
                 TextColumn::make('locality')
-                    ->label('Localité')
+                    ->label(__('Localité'))
                     ->searchable()
                     ->placeholder('—')
                     ->toggleable(),
                 TextColumn::make('role')
-                    ->label('Rôle')
+                    ->label(__('Rôle'))
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => $state === 'admin' ? 'Administrateur' : 'Vendeur')
+                    ->formatStateUsing(fn (string $state): string => $state === 'admin' ? __('Administrateur') : __('Vendeur'))
                     ->color(fn (string $state): string => $state === 'admin' ? 'danger' : 'success'),
                 TextColumn::make('is_premium')
-                    ->label('Premium')
+                    ->label(__('Premium'))
                     ->badge()
                     ->state(function (User $record): string {
                         if ($record->isPremium()) {
-                            return 'Activé';
+                            return __('Activé');
                         }
                         if ($record->isPremiumExpired()) {
-                            return 'Expiré';
+                            return __('Expiré');
                         }
 
-                        return 'Désactivé';
+                        return __('Désactivé');
                     })
                     ->description(function (User $record): ?string {
                         if ($record->isPremium() && $record->premium_expires_at) {
-                            return 'Jusqu’au '.$record->premium_expires_at->format('d/m/Y');
+                            return __('Jusqu’au') . ' ' . $record->premium_expires_at->format('d/m/Y');
                         }
                         if ($record->isPremiumExpired() && $record->premium_expires_at) {
-                            return 'Expiré le '.$record->premium_expires_at->format('d/m/Y');
+                            return __('Expiré le') . ' ' . $record->premium_expires_at->format('d/m/Y');
                         }
 
                         return null;
@@ -98,27 +98,27 @@ class UsersTable
                     ->sortable(),
                 TextColumn::make('products_count')
                     ->counts('products')
-                    ->label('Produits')
+                    ->label(__('Produits'))
                     ->alignEnd(),
                 TextColumn::make('created_at')
-                    ->label('Inscrit le')
+                    ->label(__('Inscrit le'))
                     ->dateTime('d/m/Y')
                     ->sortable()
                     ->toggleable(),
             ])
             ->filters([
                 SelectFilter::make('role')
-                    ->label('Rôle')
+                    ->label(__('Rôle'))
                     ->options([
-                        'admin' => 'Administrateur',
-                        'user' => 'Vendeur',
+                        'admin' => __('Administrateur'),
+                        'user' => __('Vendeur'),
                     ]),
                 SelectFilter::make('premium_status')
-                    ->label('Statut Premium')
+                    ->label(__('Statut Premium'))
                     ->options([
-                        'active' => 'Premium Activé',
-                        'expired' => 'Premium Expiré',
-                        'inactive' => 'Premium Désactivé / Standard',
+                        'active' => __('Premium Activé'),
+                        'expired' => __('Premium Expiré'),
+                        'inactive' => __('Premium Désactivé / Standard'),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return match ($data['value'] ?? null) {
@@ -132,7 +132,7 @@ class UsersTable
                         };
                     }),
                 SelectFilter::make('year')
-                    ->label('Année')
+                    ->label(__('Année'))
                     ->options([
                         '2024' => '2024',
                         '2025' => '2025',
@@ -149,20 +149,20 @@ class UsersTable
             ])
             ->recordActions([
                 Action::make('activate_premium')
-                    ->label('Activer Premium')
+                    ->label(__('Activer Premium'))
                     ->icon('heroicon-o-sparkles')
                     ->color('success')
                     ->visible(fn (User $record): bool => ! $record->isPremium())
-                    ->modalHeading(fn (User $record): string => "Activer l'abonnement Premium pour {$record->full_name}")
-                    ->modalDescription('L\'abonnement sera actif pour 12 mois à compter d\'aujourd\'hui.')
+                    ->modalHeading(fn (User $record): string => __('Activer l\'abonnement Premium pour :name', ['name' => $record->full_name]))
+                    ->modalDescription(__('L\'abonnement sera actif pour 12 mois à compter d\'aujourd\'hui.'))
                     ->form([
                         DateTimePicker::make('premium_expires_at')
-                            ->label('Date d’expiration de l’abonnement (12 mois)')
+                            ->label(__('Date d’expiration de l’abonnement (12 mois)'))
                             ->default(now()->addYear())
                             ->required()
                             ->native(false),
                         TextInput::make('premium_payment_ref')
-                            ->label('Référence ou preuve de paiement Orange Money')
+                            ->label(__('Référence ou preuve de paiement Orange Money'))
                             ->placeholder('Ex: OM TX94827492... (74 31 61 53)')
                             ->maxLength(255),
                     ])
@@ -170,31 +170,31 @@ class UsersTable
                         $record->activatePremium($data['premium_expires_at'], $data['premium_payment_ref'] ?? null);
 
                         Notification::make()
-                            ->title('Statut Premium activé')
-                            ->body("L'utilisateur {$record->full_name} peut désormais publier des produits en illimité.")
+                            ->title(__('Statut Premium activé'))
+                            ->body(__('L\'utilisateur :name peut désormais publier des produits en illimité.', ['name' => $record->full_name]))
                             ->success()
                             ->send();
                     }),
                 Action::make('deactivate_premium')
-                    ->label('Désactiver Premium')
+                    ->label(__('Désactiver Premium'))
                     ->icon('heroicon-o-no-symbol')
                     ->color('danger')
                     ->visible(fn (User $record): bool => $record->isPremium())
                     ->requiresConfirmation()
-                    ->modalHeading(fn (User $record): string => "Désactiver le statut Premium de {$record->full_name} ?")
-                    ->modalDescription('L’utilisateur perdra l’accès illimité et sera à nouveau limité à 1 produit pour ses futures publications. Ses produits existants ne seront pas supprimés.')
+                    ->modalHeading(fn (User $record): string => __('Désactiver le statut Premium de :name ?', ['name' => $record->full_name]))
+                    ->modalDescription(__('L’utilisateur perdra l’accès illimité et sera à nouveau limité à 1 produit pour ses futures publications. Ses produits existants ne seront pas supprimés.'))
                     ->action(function (User $record): void {
                         $record->deactivatePremium();
 
                         Notification::make()
-                            ->title('Statut Premium désactivé')
-                            ->body("L'utilisateur {$record->full_name} est repassé au statut standard.")
+                            ->title(__('Statut Premium désactivé'))
+                            ->body(__('L\'utilisateur :name est repassé au statut standard.', ['name' => $record->full_name]))
                             ->warning()
                             ->send();
                     }),
-                ViewAction::make()->label('Voir'),
-                EditAction::make()->label('Modifier'),
-                DeleteAction::make()->label('Supprimer'),
+                ViewAction::make()->label(__('Voir')),
+                EditAction::make()->label(__('Modifier')),
+                DeleteAction::make()->label(__('Supprimer')),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

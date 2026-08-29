@@ -35,6 +35,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'locality',
         'email',
         'role',
+        'locale',
         'is_premium',
         'premium_activated_at',
         'premium_expires_at',

@@ -23,83 +23,83 @@ class ProductsTable
             ->defaultSort('created_at', 'desc')
             ->columns([
                 ImageColumn::make('photo')
-                    ->label('Photo')
+                    ->label(__('Photo'))
                     ->imageHeight(44)
                     ->circular()
                     ->disk('public'),
                 TextColumn::make('name')
-                    ->label('Produit')
+                    ->label(__('Produit'))
                     ->searchable()
                     ->sortable()
                     ->weight('medium'),
                 TextColumn::make('user.name')
-                    ->label('Vendeur')
+                    ->label(__('Vendeur'))
                     ->placeholder('—')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('price')
-                    ->label('Prix')
+                    ->label(__('Prix'))
                     ->money('XOF')
                     ->sortable(),
                 TextColumn::make('type_produits')
-                    ->label('Catégorie')
+                    ->label(__('Catégorie'))
                     ->badge()
                     ->formatStateUsing(fn (?string $state): string => Product::typeLabels()[$state] ?? (string) $state),
                 TextColumn::make('status')
-                    ->label('Statut')
+                    ->label(__('Statut'))
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => $state === Product::STATUS_PUBLISHED ? 'Publié' : 'Brouillon')
+                    ->formatStateUsing(fn (string $state): string => $state === Product::STATUS_PUBLISHED ? __('Publié') : __('Brouillon'))
                     ->color(fn (string $state): string => $state === Product::STATUS_PUBLISHED ? 'success' : 'warning'),
                 TextColumn::make('views_count')
-                    ->label('Vues')
+                    ->label(__('Vues'))
                     ->sortable()
                     ->alignEnd(),
                 TextColumn::make('likes_count')
-                    ->label('Likes')
+                    ->label(__('Likes'))
                     ->sortable()
                     ->alignEnd()
                     ->badge()
                     ->color('danger')
                     ->icon('heroicon-m-heart'),
                 TextColumn::make('created_at')
-                    ->label('Créé le')
+                    ->label(__('Créé le'))
                     ->dateTime('d/m/Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('status')
-                    ->label('Statut')
+                    ->label(__('Statut'))
                     ->options([
-                        Product::STATUS_DRAFT => 'Brouillon',
-                        Product::STATUS_PUBLISHED => 'Publié',
+                        Product::STATUS_DRAFT => __('Brouillon'),
+                        Product::STATUS_PUBLISHED => __('Publié'),
                     ]),
                 SelectFilter::make('type_produits')
-                    ->label('Catégorie')
+                    ->label(__('Catégorie'))
                     ->options(Product::typeLabels()),
             ])
             ->recordActions([
                 Action::make('publish')
-                    ->label('Publier')
+                    ->label(__('Publier'))
                     ->icon('heroicon-o-globe-alt')
                     ->color('success')
                     ->visible(fn (Product $record): bool => ! $record->isPublished())
                     ->action(function (Product $record): void {
                         $record->publish();
-                        Notification::make()->title('Produit publié')->success()->send();
+                        Notification::make()->title(__('Produit publié'))->success()->send();
                     }),
                 Action::make('unpublish')
-                    ->label('Dépublier')
+                    ->label(__('Dépublier'))
                     ->icon('heroicon-o-eye-slash')
                     ->color('warning')
                     ->visible(fn (Product $record): bool => $record->isPublished())
                     ->action(function (Product $record): void {
                         $record->unpublish();
-                        Notification::make()->title('Produit dépublié')->success()->send();
+                        Notification::make()->title(__('Produit dépublié'))->success()->send();
                     }),
-                ViewAction::make()->label('Voir'),
-                EditAction::make()->label('Modifier'),
-                DeleteAction::make()->label('Supprimer'),
+                ViewAction::make()->label(__('Voir')),
+                EditAction::make()->label(__('Modifier')),
+                DeleteAction::make()->label(__('Supprimer')),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -10,9 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class SellerStatsOverview extends StatsOverviewWidget
 {
-    protected ?string $heading = 'Espace vendeur';
+    public function getHeading(): ?string
+    {
+        return __('Espace vendeur');
+    }
 
-    protected ?string $description = 'Exposez, publiez et suivez la visibilité de vos annonces';
+    public function getDescription(): ?string
+    {
+        return __('Exposez, publiez et suivez la visibilité de vos annonces');
+    }
 
     protected function getStats(): array
     {
@@ -28,32 +34,32 @@ class SellerStatsOverview extends StatsOverviewWidget
 
         $isPremium = $user?->isPremium() ?? false;
         $premiumDesc = $isPremium
-            ? ($user?->premium_expires_at ? 'Expire le '.$user->premium_expires_at->format('d/m/Y') : 'Illimité')
-            : 'Limité à 1 produit';
+            ? ($user?->premium_expires_at ? __('Expire le') . ' ' . $user->premium_expires_at->format('d/m/Y') : __('Illimité'))
+            : __('Limité à 1 produit');
 
         return [
-            Stat::make('Statut Compte', $isPremium ? 'Vendeur Premium' : 'Standard Gratuit')
+            Stat::make(__('Statut Compte'), $isPremium ? __('Vendeur Premium') : __('Standard Gratuit'))
                 ->description($premiumDesc)
                 ->descriptionIcon($isPremium ? 'heroicon-m-sparkles' : 'heroicon-m-user')
                 ->color($isPremium ? 'success' : 'gray'),
-            Stat::make('Total produits', $total)
-                ->description('Dans votre catalogue')
+            Stat::make(__('Total produits'), $total)
+                ->description(__('Dans votre catalogue'))
                 ->descriptionIcon('heroicon-m-cube')
                 ->color('primary'),
-            Stat::make('Publiés', $published)
-                ->description('Visibles sur la marketplace')
+            Stat::make(__('Publiés'), $published)
+                ->description(__('Visibles sur la marketplace'))
                 ->descriptionIcon('heroicon-m-globe-alt')
                 ->color('success'),
-            Stat::make('Brouillons', $drafts)
-                ->description('Non exposés pour le moment')
+            Stat::make(__('Brouillons'), $drafts)
+                ->description(__('Non exposés pour le moment'))
                 ->descriptionIcon('heroicon-m-pencil-square')
                 ->color('warning'),
-            Stat::make('Vues totales', number_format($views, 0, ',', ' '))
-                ->description('Suivi de visibilité')
+            Stat::make(__('Vues totales'), number_format($views, 0, ',', ' '))
+                ->description(__('Suivi de visibilité'))
                 ->descriptionIcon('heroicon-m-eye')
                 ->color('info'),
-            Stat::make('Likes totaux', number_format($likes, 0, ',', ' '))
-                ->description('Cœurs reçus sur vos produits')
+            Stat::make(__('Likes totaux'), number_format($likes, 0, ',', ' '))
+                ->description(__('Cœurs reçus sur vos produits'))
                 ->descriptionIcon('heroicon-m-heart')
                 ->color('danger'),
         ];

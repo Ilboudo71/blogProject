@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,12 +22,17 @@
             </a>
 
             <nav class="header-nav" aria-label="Navigation principale">
-                <a href="{{ route('marketplace.home') }}#catalogue" class="nav-link">Catalogue</a>
+                <a href="{{ route('marketplace.home') }}#catalogue" class="nav-link">{{ __('Catalogue') }}</a>
+                <div class="header-lang-switch" style="display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; font-weight: 700;">
+                    <a href="{{ route('locale.switch', 'fr') }}" style="color: {{ app()->getLocale() === 'fr' ? '#0f766e' : '#64748b' }}; text-decoration: none; padding: 0.2rem 0.4rem; border-radius: 0.35rem; background: {{ app()->getLocale() === 'fr' ? 'rgba(15,118,110,0.1)' : 'transparent' }};">FR</a>
+                    <span style="color: #cbd5e1;">|</span>
+                    <a href="{{ route('locale.switch', 'en') }}" style="color: {{ app()->getLocale() === 'en' ? '#0f766e' : '#64748b' }}; text-decoration: none; padding: 0.2rem 0.4rem; border-radius: 0.35rem; background: {{ app()->getLocale() === 'en' ? 'rgba(15,118,110,0.1)' : 'transparent' }};">EN</a>
+                </div>
                 @auth
-                    <a href="{{ auth()->user()->panelHomeUrl() }}" class="btn btn-primary">Mon espace</a>
+                    <a href="{{ auth()->user()->panelHomeUrl() }}" class="btn btn-primary">{{ __('Mon espace') }}</a>
                 @else
-                    <a href="/user/login" class="btn btn-ghost">Connexion</a>
-                    <a href="/user/register" class="btn btn-primary">Créer un compte</a>
+                    <a href="/user/login" class="btn btn-ghost">{{ __('Connexion') }}</a>
+                    <a href="/user/register" class="btn btn-primary">{{ __('Créer un compte') }}</a>
                 @endauth
             </nav>
         </div>
@@ -46,38 +51,38 @@
                         <span class="brand-text">Raaga</span>
                     </a>
                     <p class="footer-copy">
-                        Plateforme locale pour exposer, publier et contacter les vendeurs en toute simplicité.
+                        {{ __('Plateforme locale pour exposer, publier et contacter les vendeurs en toute simplicité.') }}
                     </p>
                 </div>
 
                 <div>
-                    <h3 class="footer-title">Navigation</h3>
+                    <h3 class="footer-title">{{ __('Navigation') }}</h3>
                     <ul class="footer-list">
-                        <li><a href="{{ route('marketplace.home') }}">Accueil</a></li>
-                        <li><a href="{{ route('marketplace.home') }}#catalogue">Catalogue</a></li>
-                        <li><a href="/user/register">Devenir vendeur</a></li>
-                        <li><a href="/user/login">Connexion</a></li>
+                        <li><a href="{{ route('marketplace.home') }}">{{ __('Accueil') }}</a></li>
+                        <li><a href="{{ route('marketplace.home') }}#catalogue">{{ __('Catalogue') }}</a></li>
+                        <li><a href="/user/register">{{ __('Devenir vendeur') }}</a></li>
+                        <li><a href="/user/login">{{ __('Connexion') }}</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3 class="footer-title">Informations</h3>
+                    <h3 class="footer-title">{{ __('Informations') }}</h3>
                     <ul class="footer-list">
-                        <li><a href="{{ route('marketplace.about') }}">À propos</a></li>
-                        <li><a href="{{ route('marketplace.privacy') }}">Politique de confidentialité</a></li>
-                        <li><a href="{{ route('marketplace.terms') }}">Conditions d’utilisation</a></li>
+                        <li><a href="{{ route('marketplace.about') }}">{{ __('À propos') }}</a></li>
+                        <li><a href="{{ route('marketplace.privacy') }}">{{ __('Politique de confidentialité') }}</a></li>
+                        <li><a href="{{ route('marketplace.terms') }}">{{ __('Conditions d’utilisation') }}</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3 class="footer-title">Contact</h3>
+                    <h3 class="footer-title">{{ __('Contact') }}</h3>
                     <ul class="footer-list footer-contact">
                         <li>
                             <span>WhatsApp</span>
                             <a href="https://wa.me/22674650924" target="_blank" rel="noopener noreferrer">+226 74 65 09 24</a>
                         </li>
                         <li>
-                            <span>E-mail</span>
+                            <span>{{ __('E-mail') }}</span>
                             <a href="mailto:ilboudo7199@gmail.com">ilboudo7199@gmail.com</a>
                         </li>
                     </ul>
@@ -85,8 +90,8 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; {{ date('Y') }} Raaga. Tous droits réservés.</p>
-                <p>Conçu pour une mise en relation simple entre vendeurs et acheteurs.</p>
+                <p>&copy; {{ date('Y') }} Raaga. {{ __('Tous droits réservés.') }}</p>
+                <p>{{ __('Conçu pour une mise en relation simple entre vendeurs et acheteurs.') }}</p>
             </div>
         </div>
     </footer>

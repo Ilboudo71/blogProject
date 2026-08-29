@@ -15,7 +15,6 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use UnitEnum;
 
 class ProduitsResource extends Resource
 {
@@ -23,15 +22,27 @@ class ProduitsResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $navigationLabel = 'Mes produits';
+    public static function getNavigationLabel(): string
+    {
+        return __('Mes produits');
+    }
 
-    protected static ?string $modelLabel = 'produit';
+    public static function getModelLabel(): string
+    {
+        return __('produit');
+    }
 
-    protected static ?string $pluralModelLabel = 'produits';
+    public static function getPluralModelLabel(): string
+    {
+        return __('produits');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Catalogue');
+    }
 
     protected static ?string $recordTitleAttribute = 'name';
-
-    protected static string|UnitEnum|null $navigationGroup = 'Catalogue';
 
     protected static ?int $navigationSort = 1;
 

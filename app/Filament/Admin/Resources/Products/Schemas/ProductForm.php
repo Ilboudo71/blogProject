@@ -16,39 +16,39 @@ class ProductForm
     {
         return $schema
             ->components([
-                Section::make('Informations produit')
+                Section::make(__('Informations produit'))
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
-                            ->label('Nom du produit')
+                            ->label(__('Nom du produit'))
                             ->required()
                             ->maxLength(255)
                             ->columnSpanFull(),
                         TextInput::make('price')
-                            ->label('Prix (FCFA)')
+                            ->label(__('Prix (FCFA)'))
                             ->numeric()
                             ->required()
                             ->minValue(0)
                             ->prefix('FCFA'),
                         Select::make('type_produits')
-                            ->label('Catégorie')
+                            ->label(__('Catégorie'))
                             ->options(Product::typeLabels())
                             ->required()
                             ->searchable(),
                         Select::make('status')
-                            ->label('Statut')
+                            ->label(__('Statut'))
                             ->options([
-                                Product::STATUS_DRAFT => 'Brouillon',
-                                Product::STATUS_PUBLISHED => 'Publié',
+                                Product::STATUS_DRAFT => __('Brouillon'),
+                                Product::STATUS_PUBLISHED => __('Publié'),
                             ])
                             ->default(Product::STATUS_DRAFT)
                             ->required(),
                         Textarea::make('description')
-                            ->label('Description')
+                            ->label(__('Description'))
                             ->rows(4)
                             ->columnSpanFull(),
                         FileUpload::make('photo')
-                            ->label('Photo')
+                            ->label(__('Photo'))
                             ->image()
                             ->directory('products')
                             ->disk('public')
