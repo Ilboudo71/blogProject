@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Filament\Auth\Notifications\ResetPassword as SyncResetPasswordNotification;
 use App\Http\Responses\LoginResponse;
+use App\Http\Responses\LogoutResponse;
 use App\Http\Responses\RegistrationResponse;
 use Filament\Auth\Http\Responses\Contracts\LoginResponse as LoginResponseContract;
+use Filament\Auth\Http\Responses\Contracts\LogoutResponse as LogoutResponseContract;
 use Filament\Auth\Http\Responses\Contracts\RegistrationResponse as RegistrationResponseContract;
 use Filament\Auth\Notifications\ResetPassword as FilamentResetPasswordNotification;
 use Illuminate\Support\Facades\URL;
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(LoginResponseContract::class, LoginResponse::class);
         $this->app->singleton(RegistrationResponseContract::class, RegistrationResponse::class);
+        $this->app->singleton(LogoutResponseContract::class, LogoutResponse::class);
 
         // Envoi immédiat (sans file d'attente), comme Breeze par défaut.
         $this->app->bind(
