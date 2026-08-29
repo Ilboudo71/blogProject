@@ -27,9 +27,9 @@ class ListProduits extends ListRecords
                 ->label('Passer en Premium (5 050 FCFA/an)')
                 ->icon('heroicon-o-sparkles')
                 ->color('warning')
-                ->modalWidth('lg')
+                ->modalWidth('2xl')
                 ->modalHeading('Abonnement Premium annuel')
-                ->modalDescription('Débloquez la publication illimitée de produits sur Raaga.')
+                ->modalDescription('Débloquez la publication illimitée de vos produits sur Raaga.')
                 ->modalContent(view('filament.modals.premium-info'))
                 ->modalSubmitAction(false)
                 ->modalCancelActionLabel('Fermer');
@@ -43,9 +43,9 @@ class ListProduits extends ListRecords
                 ->label('Nouveau produit (Limite atteinte)')
                 ->icon('heroicon-o-lock-closed')
                 ->color('gray')
-                ->modalWidth('lg')
+                ->modalWidth('2xl')
                 ->modalHeading('Limite de produit atteinte')
-                ->modalDescription('Votre compte gratuit vous autorise à publier 1 produit. Passez en Premium pour publier des produits en illimité.')
+                ->modalDescription('Votre compte gratuit vous autorise à publier 1 seul produit. Passez en Premium pour publier en illimité toute l\'année.')
                 ->modalContent(view('filament.modals.premium-info'))
                 ->modalSubmitAction(false)
                 ->modalCancelActionLabel('Fermer');

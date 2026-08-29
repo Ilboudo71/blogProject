@@ -89,13 +89,13 @@ class ProduitsTable
                     ->color('success')
                     ->visible(fn (Product $record): bool => ! $record->isPublished())
                     ->requiresConfirmation(fn (): bool => (bool) Auth::user()?->canPublishMoreProducts())
-                    ->modalWidth('lg')
+                    ->modalWidth('2xl')
                     ->modalHeading(fn (): string => Auth::user()?->canPublishMoreProducts()
                         ? 'Publier ce produit ?'
                         : 'Abonnement Premium requis')
                     ->modalDescription(fn (): ?string => Auth::user()?->canPublishMoreProducts()
                         ? 'Le produit sera visible sur la marketplace publique.'
-                        : 'Votre compte gratuit est limité à 1 produit publié. Passez en statut Premium (5 050 FCFA/an) pour publier des produits supplémentaires.')
+                        : 'Votre compte gratuit est limité à 1 seul produit publié. Passez en statut Premium (5 050 FCFA/an) pour publier des produits en illimité toute l\'année.')
                     ->modalContent(fn (): ?\Illuminate\Contracts\View\View => Auth::user()?->canPublishMoreProducts()
                         ? null
                         : view('filament.modals.premium-info'))

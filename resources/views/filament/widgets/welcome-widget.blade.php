@@ -7,8 +7,8 @@
 
 <x-filament-widgets::widget class="fi-welcome-widget">
     <x-filament::section class="fi-welcome-section">
-        <div class="fi-welcome-inner">
-            <div class="fi-welcome-avatar" aria-hidden="true">
+        <div class="fi-welcome-inner" style="padding: 1.5rem 1.75rem;">
+            <div class="fi-welcome-avatar" aria-hidden="true" style="width: 4.2rem; height: 4.2rem; font-size: 1.6rem; border-radius: 1.15rem;">
                 @if ($user?->photo_url)
                     <img src="{{ $user->photo_url }}" alt="">
                 @else
@@ -17,34 +17,34 @@
             </div>
 
             <div class="fi-welcome-copy">
-                <div class="flex items-center gap-2">
-                    <p class="fi-welcome-eyebrow">Bonjour</p>
+                <div class="flex items-center gap-2.5">
+                    <p class="fi-welcome-eyebrow" style="font-size: 0.85rem; font-weight: 800; letter-spacing: 0.08em;">Bonjour</p>
                     @if ($isPremium)
-                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 border border-amber-300/60 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800/60">
-                            <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300 shadow-xs">
+                            <svg class="w-3.5 h-3.5 fill-current text-amber-600" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
                             </svg>
-                            Premium
+                            Vendeur Premium
                         </span>
                     @elseif ($isAdmin)
-                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-rose-100 text-rose-800 border border-rose-300/60 dark:bg-rose-950/60 dark:text-rose-300">
-                            Admin
+                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-black uppercase tracking-wider bg-rose-100 text-rose-900 border border-rose-300">
+                            Administrateur
                         </span>
                     @else
-                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold text-slate-600 bg-slate-100 dark:bg-slate-800 dark:text-slate-400">
+                        <span class="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-bold text-slate-700 bg-slate-200/80 border border-slate-300">
                             Vendeur Standard
                         </span>
                     @endif
                 </div>
 
-                <h2 class="fi-welcome-heading">
-                    Bienvenue, <span>{{ $fullName }}</span>
+                <h2 class="fi-welcome-heading" style="font-size: 1.65rem; font-weight: 900; margin-top: 0.3rem;">
+                    Bienvenue, <span style="color: #0f766e;">{{ $fullName }}</span>
                 </h2>
-                <p class="fi-welcome-text">
+                <p class="fi-welcome-text" style="font-size: 1.05rem; color: #475569; margin-top: 0.35rem; line-height: 1.5;">
                     @if ($isAdmin)
                         Vous êtes connecté à l’espace administration Raaga.
                     @else
-                        Gérez vos annonces, suivez leur visibilité et publiez en toute simplicité sur Raaga.
+                        Gérez vos annonces, suivez leur visibilité et publiez vos articles en toute simplicité sur Raaga.
                     @endif
                 </p>
             </div>
