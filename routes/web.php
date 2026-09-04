@@ -23,6 +23,9 @@ Route::get('/lang/{locale}', function (string $locale) {
     return redirect()->back();
 })->name('locale.switch');
 
+Route::get('/media/products/{product}', [\App\Http\Controllers\ProductMediaController::class, 'show'])
+    ->name('media.product');
+
 Route::post('/products/photo', [\App\Http\Controllers\ProductPhotoController::class, 'store'])
     ->middleware('auth')
     ->name('products.photo.upload');

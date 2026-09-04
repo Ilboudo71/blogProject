@@ -22,11 +22,10 @@ class ProductsTable
         return $table
             ->defaultSort('created_at', 'desc')
             ->columns([
-                ImageColumn::make('photo')
+                ImageColumn::make('photo_url')
                     ->label(__('Photo'))
                     ->imageHeight(44)
-                    ->circular()
-                    ->disk('public'),
+                    ->circular(),
                 TextColumn::make('name')
                     ->label(__('Produit'))
                     ->searchable()

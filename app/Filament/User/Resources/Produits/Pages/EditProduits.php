@@ -5,12 +5,13 @@ namespace App\Filament\User\Resources\Produits\Pages;
 use App\Filament\User\Resources\Produits\ProduitsResource;
 use App\Models\Product;
 use App\Models\User;
-use Filament\Actions\Action;
+use App\Support\ProductPhotoService;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class EditProduits extends EditRecord
 {
@@ -19,18 +20,6 @@ class EditProduits extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('change_photo')
-                ->label(__('Modifier la photo'))
-                ->icon('heroicon-o-camera')
-                ->color('primary')
-                ->modalHeading(__('Modifier la photo du produit'))
-                ->modalDescription(__('Choisissez une nouvelle image. Elle sera enregistrée immédiatement.'))
-                ->modalContent(fn (): \Illuminate\Contracts\View\View => view('filament.modals.change-product-photo', [
-                    'product' => $this->getRecord(),
-                ]))
-                ->modalSubmitAction(false)
-                ->modalCancelActionLabel(__('Fermer'))
-                ->modalWidth('md'),
             DeleteAction::make()->label(__('Supprimer')),
         ];
     }
@@ -63,16 +52,38 @@ class EditProduits extends EditRecord
         /** @var Product $record */
         $record = $this->record;
 
-        // Ne pas effacer la photo existante si le champ revient vide pendant l'édition.
         if (blank($data['photo'] ?? null)) {
             unset($data['photo']);
         }
+
+        unset($data['photo_data'], $data['photo_mime']);
 
         if (($data['status'] ?? null) === Product::STATUS_PUBLISHED && ! $record->published_at) {
             $data['published_at'] = Carbon::now();
         }
 
         return $data;
+    }
+
+    protected function afterSave(): void
+    {
+        /** @var Product $record */
+        $record = $this->record;
+        $path = is_string($record->photo) ? $record->photo : '';
+
+        if ($path !== '') {
+            $pending = Cache::pull('pending_product_photo:'.$path);
+            if (is_array($pending) && filled($pending['data'] ?? null)) {
+                $record->forceFill([
+                    'photo_mime' => $pending['mime'] ?? 'image/jpeg',
+                    'photo_data' => $pending['data'],
+                ])->save();
+
+                return;
+            }
+        }
+
+        app(ProductPhotoService::class)->persistDiskPhotoToDatabase($record);
     }
 
     protected function getRedirectUrl(): string

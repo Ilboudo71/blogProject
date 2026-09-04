@@ -24,10 +24,15 @@ class Product extends Model
         'description',
         'type_produits',
         'photo',
+        'photo_mime',
         'status',
         'views_count',
         'likes_count',
         'published_at',
+    ];
+
+    protected $hidden = [
+        'photo_data',
     ];
 
     protected $appends = [
@@ -133,6 +138,12 @@ class Product extends Model
 
     public function getPhotoUrlAttribute(): ?string
     {
+        if ($this->id && (filled($this->photo) || filled($this->photo_data))) {
+            $version = $this->updated_at?->timestamp ?? time();
+
+            return url('/media/products/'.$this->id).'?v='.$version;
+        }
+
         return self::resolvePublicUrl($this->photo);
     }
 

@@ -7,6 +7,7 @@ use App\Support\ProductPhotoService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 class ProductPhotoController extends Controller
@@ -27,13 +28,20 @@ class ProductPhotoController extends Controller
             $this->ensureCanManage($product);
 
             $path = $this->photos->replaceOnProduct($product, $file);
+            $url = $product->fresh()->photo_url;
         } else {
-            $path = $this->photos->store($file);
+            $payload = $this->photos->storeWithPayload($file);
+            $path = $payload['path'];
+            Cache::put('pending_product_photo:'.$path, [
+                'mime' => $payload['mime'],
+                'data' => $payload['data'],
+            ], now()->addDay());
+            $url = Product::resolvePublicUrl($path);
         }
 
         return response()->json([
             'path' => $path,
-            'url' => Product::resolvePublicUrl($path),
+            'url' => $url,
             'message' => __('Photo mise à jour.'),
         ]);
     }

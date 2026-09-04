@@ -9,6 +9,14 @@
 
 .fi-body {
     background: #e7eef0 !important;
+    font-size: 1.08rem !important;
+}
+
+.fi-sidebar-item-label,
+.fi-sidebar-group-label,
+.fi-topbar-item-label {
+    font-size: 1.08rem !important;
+    font-weight: 650 !important;
 }
 
 /* --- NAV / TOPBAR --- */
@@ -146,6 +154,31 @@ html.fi .fi-sidebar {
 
 .fi-header-heading {
     color: #102823 !important;
+    font-size: clamp(1.55rem, 2.5vw, 1.95rem) !important;
+}
+
+.fi-section-header-heading,
+.fi-ta-header-heading {
+    font-size: 1.28rem !important;
+}
+
+.fi-fo-field-wrp-label span,
+.fi-input,
+.fi-select-input,
+.fi-ta-text,
+.fi-btn-label,
+.fi-link-label,
+.fi-badge,
+.fi-fo-field-wrp-hint {
+    font-size: 1.05rem !important;
+}
+
+.fi-wi-stats-overview-stat-label {
+    font-size: 1.05rem !important;
+}
+
+.fi-wi-stats-overview-stat-value {
+    font-size: 2rem !important;
 }
 
 .fi-simple-layout {
@@ -1038,6 +1071,90 @@ html.fi .fi-sidebar {
     .pm-btn-wa, .pm-btn-phone {
         font-size: 0.85rem;
         padding: 0.8rem 0.75rem;
+    }
+}
+
+/* Seller home: Publier un produit + Premium */
+.seller-home-row__layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.6fr);
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.seller-publish-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.15rem 1.2rem;
+    border-radius: 1.15rem;
+    background: linear-gradient(160deg, #0f766e 0%, #0d9488 100%);
+    color: #fff;
+    box-shadow: 0 10px 28px rgba(15, 118, 110, 0.22);
+}
+
+.seller-publish-card__icon {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.8rem;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.seller-publish-card__icon svg {
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+.seller-publish-card__title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.seller-publish-card__desc {
+    margin: 0.25rem 0 0;
+    font-size: 1rem;
+    line-height: 1.4;
+    opacity: 0.92;
+}
+
+.seller-publish-card__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    border: 0;
+    border-radius: 0.8rem;
+    background: #fff;
+    color: #0f766e;
+    font-weight: 800;
+    font-size: 1.05rem;
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.seller-publish-card__btn:hover {
+    background: #ecfeff;
+}
+
+.seller-publish-card__hint {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    opacity: 0.9;
+}
+
+.seller-home-row__premium {
+    min-width: 0;
+}
+
+@media (max-width: 900px) {
+    .seller-home-row__layout {
+        grid-template-columns: 1fr;
     }
 }
 
