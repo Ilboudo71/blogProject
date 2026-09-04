@@ -58,7 +58,7 @@
     "Le produit sera visible sur la marketplace publique.": "The product will be visible on the public marketplace.",
     "Votre compte gratuit est limité à 1 seul produit publié. Passez en statut Premium (5 050 FCFA\/an) pour publier des produits en illimité toute l'année.": "Your free account is limited to 1 published product. Upgrade to Premium (5,050 FCFA\/yr) to publish unlimited products all year round.",
     "Votre compte gratuit est limité à 1 produit publié. Passez en Premium (5 050 FCFA\/an) pour publier des produits en illimité.": "Your free account is limited to 1 published product. Upgrade to Premium (5,050 FCFA\/yr) to publish unlimited products.",
-    "Publication impossible": "Publishing Not Allowed",
+    "Publication impossible": "Publishing not allowed",
     "Produit publié": "Product Published",
     "Votre produit est désormais visible par tous sur la marketplace.": "Your product is now visible to everyone on the marketplace.",
     "Produit dépublié": "Product Unpublished",
@@ -203,5 +203,13 @@
     "Retirer": "Remove",
     "JPG, PNG, WEBP, GIF… max. 20 Mo. Cliquez sur Modifier pour remplacer la photo immédiatement.": "JPG, PNG, WEBP, GIF… max. 20 MB. Click Edit to replace the photo immediately.",
     "Veuillez ajouter une photo du produit.": "Please add a product photo.",
-    "Utilisez le bouton Modifier pour changer la photo rapidement.": "Use the Edit button to change the photo quickly."
+    "Utilisez le bouton Modifier pour changer la photo rapidement.": "Use the Edit button to change the photo quickly.",
+    "Modifier la photo": "Edit photo",
+    "Modifier la photo du produit": "Edit product photo",
+    "Choisissez une nouvelle image. Elle sera enregistrée immédiatement.": "Choose a new image. It will be saved immediately.",
+    "Choisir une nouvelle photo": "Choose a new photo",
+    "La photo est enregistrée immédiatement après sélection.": "The photo is saved immediately after selection.",
+    "Utilisez le bouton Modifier la photo pour changer l’image rapidement.": "Use the Edit photo button to change the image quickly.",
+    "JPG, PNG, WEBP, GIF… max. 20 Mo. Cliquez sur Modifier la photo pour remplacer l’image immédiatement.": "JPG, PNG, WEBP, GIF… max. 20 MB. Click Edit photo to replace the image immediately.",
+    "Votre compte gratuit est limité à 1 produit publié. Passez au statut Premium (5 050 FCFA\/an) pour publier des produits supplémentaires.": "Your free account is limited to 1 published product. Upgrade to Premium (5,050 FCFA\/year) to publish more."
 }

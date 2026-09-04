@@ -5,6 +5,7 @@ namespace App\Filament\User\Resources\Produits\Pages;
 use App\Filament\User\Resources\Produits\ProduitsResource;
 use App\Models\Product;
 use App\Models\User;
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
@@ -18,7 +19,19 @@ class EditProduits extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make()->label('Supprimer'),
+            Action::make('change_photo')
+                ->label(__('Modifier la photo'))
+                ->icon('heroicon-o-camera')
+                ->color('primary')
+                ->modalHeading(__('Modifier la photo du produit'))
+                ->modalDescription(__('Choisissez une nouvelle image. Elle sera enregistrée immédiatement.'))
+                ->modalContent(fn (): \Illuminate\Contracts\View\View => view('filament.modals.change-product-photo', [
+                    'product' => $this->getRecord(),
+                ]))
+                ->modalSubmitAction(false)
+                ->modalCancelActionLabel(__('Fermer'))
+                ->modalWidth('md'),
+            DeleteAction::make()->label(__('Supprimer')),
         ];
     }
 
@@ -34,8 +47,8 @@ class EditProduits extends EditRecord
         if ($newStatus === Product::STATUS_PUBLISHED && ! $record->isPublished()) {
             if ($user && ! $user->canPublishMoreProducts()) {
                 Notification::make()
-                    ->title('Publication impossible')
-                    ->body('Votre compte gratuit est limité à 1 produit publié. Passez au statut Premium (5 050 FCFA/an) pour publier des produits supplémentaires.')
+                    ->title(__('Publication impossible'))
+                    ->body(__('Votre compte gratuit est limité à 1 produit publié. Passez au statut Premium (5 050 FCFA/an) pour publier des produits supplémentaires.'))
                     ->danger()
                     ->persistent()
                     ->send();

@@ -124,6 +124,18 @@ class ProduitsTable
                             ->send();
                     }),
                 ViewAction::make()->label(__('Voir')),
+                Action::make('change_photo')
+                    ->label(__('Modifier la photo'))
+                    ->icon('heroicon-o-camera')
+                    ->color('primary')
+                    ->modalHeading(__('Modifier la photo du produit'))
+                    ->modalDescription(__('Choisissez une nouvelle image. Elle sera enregistrée immédiatement.'))
+                    ->modalContent(fn (Product $record): \Illuminate\Contracts\View\View => view('filament.modals.change-product-photo', [
+                        'product' => $record,
+                    ]))
+                    ->modalSubmitAction(false)
+                    ->modalCancelActionLabel(__('Fermer'))
+                    ->modalWidth('md'),
                 EditAction::make()->label(__('Modifier')),
                 DeleteAction::make()->label(__('Supprimer')),
             ])
