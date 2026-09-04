@@ -3,7 +3,7 @@
 namespace App\Filament\User\Resources\Produits\Schemas;
 
 use App\Models\Product;
-use Filament\Forms\Components\FileUpload;
+use App\Support\ProductPhotoUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -49,15 +49,7 @@ class ProduitsForm
                             ->label(__('Description'))
                             ->rows(4)
                             ->columnSpanFull(),
-                        FileUpload::make('photo')
-                            ->label(__('Photo'))
-                            ->image()
-                            ->directory('products')
-                            ->disk('public')
-                            ->visibility('public')
-                            ->imageEditor()
-                            ->required()
-                            ->columnSpanFull(),
+                        ProductPhotoUpload::make('photo'),
                     ]),
             ]);
     }

@@ -22,7 +22,16 @@ mkdir -p \
 chown -R www-data:www-data storage bootstrap/cache
 chmod -R ug+rwx storage bootstrap/cache
 
+# Recrée le lien public/storage de façon fiable (évite un dossier vide qui casse les images).
+if [ -L public/storage ]; then
+  rm -f public/storage
+elif [ -d public/storage ]; then
+  rm -rf public/storage
+elif [ -e public/storage ]; then
+  rm -f public/storage
+fi
 php artisan storage:link || true
+chown -R www-data:www-data storage/app/public || true
 
 echo "Caching Laravel..."
 php artisan config:cache

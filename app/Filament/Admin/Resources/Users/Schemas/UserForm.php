@@ -73,8 +73,18 @@ class UserForm
                             ->disk('public')
                             ->visibility('public')
                             ->avatar()
-                            ->imageEditor()
-                            ->circleCropper()
+                            ->acceptedFileTypes([
+                                'image/jpeg',
+                                'image/png',
+                                'image/webp',
+                                'image/gif',
+                                'image/bmp',
+                                'image/heic',
+                                'image/heif',
+                                'image/avif',
+                                'image/*',
+                            ])
+                            ->maxSize(10240)
                             ->columnSpanFull(),
                     ]),
 

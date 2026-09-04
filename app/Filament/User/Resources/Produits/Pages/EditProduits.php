@@ -50,6 +50,11 @@ class EditProduits extends EditRecord
         /** @var Product $record */
         $record = $this->record;
 
+        // Ne pas effacer la photo existante si le champ revient vide pendant l'édition.
+        if (blank($data['photo'] ?? null)) {
+            unset($data['photo']);
+        }
+
         if (($data['status'] ?? null) === Product::STATUS_PUBLISHED && ! $record->published_at) {
             $data['published_at'] = Carbon::now();
         }

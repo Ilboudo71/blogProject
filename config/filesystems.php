@@ -33,6 +33,8 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
+            // Ne pas servir /storage ici : ce chemin est réservé aux fichiers publics (photos produits).
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/private-files',
             'serve' => true,
             'throw' => false,
             'report' => false,
@@ -43,6 +45,7 @@ return [
             'root' => storage_path('app/public'),
             'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/storage',
             'visibility' => 'public',
+            'serve' => true,
             'throw' => false,
             'report' => false,
         ],

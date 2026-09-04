@@ -1,7 +1,7 @@
 {
     "Abonnement Premium annuel": "Abonnement Premium annuel",
     "Débloquez la publication illimitée de vos produits sur Raaga.": "Débloquez la publication illimitée de vos produits sur Raaga.",
-    "Passer en Premium (5 050 FCFA/an)": "Passer en Premium (5 050 FCFA/an)",
+    "Passer en Premium (5 050 FCFA\/an)": "Passer en Premium (5 050 FCFA\/an)",
     "Nouveau produit": "Nouveau produit",
     "Nouveau produit (Limite atteinte)": "Nouveau produit (Limite atteinte)",
     "Limite de produit atteinte": "Limite de produit atteinte",
@@ -27,5 +27,6 @@
     "Administrateur": "Administrateur",
     "Vendeur": "Vendeur",
     "Statut Premium actif": "Statut Premium actif",
-    "Permet de publier un nombre illimité de produits.": "Permet de publier un nombre illimité de produits."
+    "Permet de publier un nombre illimité de produits.": "Permet de publier un nombre illimité de produits.",
+    "Formats acceptés : JPG, PNG, WEBP, GIF, BMP, HEIC… Cliquez pour ajouter ou remplacer la photo (max. 20 Mo).": "Formats acceptés : JPG, PNG, WEBP, GIF, BMP, HEIC… Cliquez pour ajouter ou remplacer la photo (max. 20 Mo)."
 }

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -143,6 +142,20 @@ class Product extends Model
             $path = $path[0] ?? null;
         }
 
+        if (is_string($path)) {
+            $trimmed = trim($path);
+
+            // Filament peut parfois stocker un JSON ["products/xxx.jpg"]
+            if ($trimmed !== '' && ($trimmed[0] === '[' || $trimmed[0] === '{')) {
+                $decoded = json_decode($trimmed, true);
+                if (is_array($decoded)) {
+                    $path = $decoded[0] ?? null;
+                }
+            } else {
+                $path = $trimmed;
+            }
+        }
+
         $path = is_string($path) ? trim($path) : '';
 
         if ($path === '') {
@@ -153,12 +166,17 @@ class Product extends Model
             return $path;
         }
 
-        $path = ltrim($path, '/');
+        $path = ltrim(str_replace('\\', '/', $path), '/');
 
         if (str_starts_with($path, 'storage/')) {
             $path = substr($path, strlen('storage/'));
         }
 
-        return Storage::disk('public')->url($path);
+        if (str_starts_with($path, 'public/')) {
+            $path = substr($path, strlen('public/'));
+        }
+
+        // URL relative : fonctionne même si APP_URL est incorrect sur Render.
+        return '/storage/'.$path;
     }
 }

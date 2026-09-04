@@ -18,12 +18,21 @@ class EditProfile extends BaseEditProfile
                     ->label(__('Photo de profil'))
                     ->image()
                     ->avatar()
-                    ->imageEditor()
-                    ->circleCropper()
                     ->directory('users')
                     ->disk('public')
                     ->visibility('public')
-                    ->maxSize(4096)
+                    ->acceptedFileTypes([
+                        'image/jpeg',
+                        'image/png',
+                        'image/webp',
+                        'image/gif',
+                        'image/bmp',
+                        'image/heic',
+                        'image/heif',
+                        'image/avif',
+                        'image/*',
+                    ])
+                    ->maxSize(10240)
                     ->helperText(__('Ajoutez ou modifiez votre photo de profil.')),
                 TextInput::make('first_name')
                     ->label(__('Prénom'))
