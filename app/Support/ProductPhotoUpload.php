@@ -2,44 +2,26 @@
 
 namespace App\Support;
 
-use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\ViewField;
 
 class ProductPhotoUpload
 {
     /**
-     * Champ photo produit fiable (création + modification).
+     * Champ photo produit : aperçu + bouton Modifier, upload HTTP natif (sans Livewire).
      */
-    public static function make(string $name = 'photo'): FileUpload
+    public static function make(string $name = 'photo'): ViewField
     {
-        return FileUpload::make($name)
+        return ViewField::make($name)
             ->label(__('Photo'))
-            ->image()
-            ->disk('public')
-            ->directory('products')
-            ->visibility('public')
-            ->acceptedFileTypes([
-                'image/jpeg',
-                'image/jpg',
-                'image/pjpeg',
-                'image/png',
-                'image/webp',
-                'image/gif',
-                'image/bmp',
-                'image/x-ms-bmp',
-                'image/svg+xml',
-                'image/heic',
-                'image/heif',
-                'image/avif',
-                'image/*',
+            ->view('filament.forms.product-photo-field')
+            ->viewData(fn (ViewField $component): array => [
+                'productId' => $component->getRecord()?->getKey(),
             ])
-            ->maxSize(20480)
-            ->imagePreviewHeight('280')
-            ->openable()
-            ->downloadable()
-            ->deletable()
-            ->moveFiles()
             ->required()
-            ->helperText(__('Formats acceptés : JPG, PNG, WEBP, GIF, BMP, HEIC… Cliquez pour ajouter ou remplacer la photo (max. 20 Mo).'))
+            ->validationMessages([
+                'required' => __('Veuillez ajouter une photo du produit.'),
+            ])
+            ->helperText(__('Utilisez le bouton Modifier pour changer la photo rapidement.'))
             ->columnSpanFull();
     }
 }

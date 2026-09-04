@@ -28,5 +28,19 @@
     "Vendeur": "Vendeur",
     "Statut Premium actif": "Statut Premium actif",
     "Permet de publier un nombre illimité de produits.": "Permet de publier un nombre illimité de produits.",
-    "Formats acceptés : JPG, PNG, WEBP, GIF, BMP, HEIC… Cliquez pour ajouter ou remplacer la photo (max. 20 Mo).": "Formats acceptés : JPG, PNG, WEBP, GIF, BMP, HEIC… Cliquez pour ajouter ou remplacer la photo (max. 20 Mo)."
+    "Formats acceptés : JPG, PNG, WEBP, GIF, BMP, HEIC… Cliquez pour ajouter ou remplacer la photo (max. 20 Mo).": "Formats acceptés : JPG, PNG, WEBP, GIF, BMP, HEIC… Cliquez pour ajouter ou remplacer la photo (max. 20 Mo).",
+    "Photo mise à jour.": "Photo mise à jour.",
+    "Veuillez sélectionner une image.": "Veuillez sélectionner une image.",
+    "L’image ne doit pas dépasser 20 Mo.": "L’image ne doit pas dépasser 20 Mo.",
+    "Le fichier doit être une image (JPG, PNG, WEBP, GIF, BMP, HEIC…).": "Le fichier doit être une image (JPG, PNG, WEBP, GIF, BMP, HEIC…).",
+    "Échec du chargement de la photo. Réessayez.": "Échec du chargement de la photo. Réessayez.",
+    "Photo du produit": "Photo du produit",
+    "Aucune photo": "Aucune photo",
+    "Envoi…": "Envoi…",
+    "Modifier": "Modifier",
+    "Ajouter une photo": "Ajouter une photo",
+    "Retirer": "Retirer",
+    "JPG, PNG, WEBP, GIF… max. 20 Mo. Cliquez sur Modifier pour remplacer la photo immédiatement.": "JPG, PNG, WEBP, GIF… max. 20 Mo. Cliquez sur Modifier pour remplacer la photo immédiatement.",
+    "Veuillez ajouter une photo du produit.": "Veuillez ajouter une photo du produit.",
+    "Utilisez le bouton Modifier pour changer la photo rapidement.": "Utilisez le bouton Modifier pour changer la photo rapidement."
 }

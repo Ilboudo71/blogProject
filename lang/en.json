@@ -190,5 +190,18 @@
     "Conditions d’utilisation": "Terms of Service",
     "Tous droits réservés.": "All rights reserved.",
     "Conçu pour une mise en relation simple entre vendeurs et acheteurs.": "Designed for simple connection between sellers and buyers.",
-    "Formats acceptés : JPG, PNG, WEBP, GIF, BMP, HEIC… Cliquez pour ajouter ou remplacer la photo (max. 20 Mo).": "Accepted formats: JPG, PNG, WEBP, GIF, BMP, HEIC… Click to add or replace the photo (max. 20 MB)."
+    "Formats acceptés : JPG, PNG, WEBP, GIF, BMP, HEIC… Cliquez pour ajouter ou remplacer la photo (max. 20 Mo).": "Accepted formats: JPG, PNG, WEBP, GIF, BMP, HEIC… Click to add or replace the photo (max. 20 MB).",
+    "Photo mise à jour.": "Photo updated.",
+    "Veuillez sélectionner une image.": "Please select an image.",
+    "L’image ne doit pas dépasser 20 Mo.": "The image must not exceed 20 MB.",
+    "Le fichier doit être une image (JPG, PNG, WEBP, GIF, BMP, HEIC…).": "The file must be an image (JPG, PNG, WEBP, GIF, BMP, HEIC…).",
+    "Échec du chargement de la photo. Réessayez.": "Photo upload failed. Please try again.",
+    "Photo du produit": "Product photo",
+    "Aucune photo": "No photo",
+    "Envoi…": "Uploading…",
+    "Ajouter une photo": "Add a photo",
+    "Retirer": "Remove",
+    "JPG, PNG, WEBP, GIF… max. 20 Mo. Cliquez sur Modifier pour remplacer la photo immédiatement.": "JPG, PNG, WEBP, GIF… max. 20 MB. Click Edit to replace the photo immediately.",
+    "Veuillez ajouter une photo du produit.": "Please add a product photo.",
+    "Utilisez le bouton Modifier pour changer la photo rapidement.": "Use the Edit button to change the photo quickly."
 }
