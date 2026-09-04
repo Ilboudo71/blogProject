@@ -214,5 +214,10 @@
     "Votre compte gratuit est limité à 1 produit publié. Passez au statut Premium (5 050 FCFA\/an) pour publier des produits supplémentaires.": "Your free account is limited to 1 published product. Upgrade to Premium (5,050 FCFA\/year) to publish more.",
     "Publier un produit": "Publish a product",
     "Ajoutez une nouvelle annonce depuis votre accueil.": "Add a new listing from your home page.",
-    "Limite atteinte : passez en Premium pour publier davantage.": "Limit reached: upgrade to Premium to publish more."
+    "Limite atteinte : passez en Premium pour publier davantage.": "Limit reached: upgrade to Premium to publish more.",
+    "Image trop volumineuse (max. 20 Mo).": "Image too large (max. 20 MB).",
+    "Echec du chargement de la photo. Reessayez.": "Photo upload failed. Please try again.",
+    "Photo mise a jour.": "Photo updated.",
+    "Envoi...": "Uploading...",
+    "Formats: JPG, PNG, WEBP, GIF. Max 20 Mo. Cliquez Modifier pour changer la photo.": "Formats: JPG, PNG, WEBP, GIF. Max 20 MB. Click Edit to change the photo."
 }

@@ -9,14 +9,27 @@
 
 .fi-body {
     background: #e7eef0 !important;
-    font-size: 1.08rem !important;
+    font-size: 18px !important;
+}
+
+html.fi,
+.fi-body,
+.fi-main,
+.fi-main-ctn,
+.fi-page,
+.fi-sidebar,
+.fi-topbar {
+    font-size: 18px !important;
 }
 
 .fi-sidebar-item-label,
 .fi-sidebar-group-label,
-.fi-topbar-item-label {
-    font-size: 1.08rem !important;
+.fi-topbar-item-label,
+.fi-user-menu-trigger,
+.fi-dropdown-list-item-label {
+    font-size: 1.15rem !important;
     font-weight: 650 !important;
+    line-height: 1.4 !important;
 }
 
 /* --- NAV / TOPBAR --- */
@@ -154,31 +167,47 @@ html.fi .fi-sidebar {
 
 .fi-header-heading {
     color: #102823 !important;
-    font-size: clamp(1.55rem, 2.5vw, 1.95rem) !important;
+    font-size: 2rem !important;
+    line-height: 1.25 !important;
 }
 
 .fi-section-header-heading,
-.fi-ta-header-heading {
-    font-size: 1.28rem !important;
+.fi-ta-header-heading,
+.fi-wi-stats-overview-stat-label,
+.fi-fo-field-wrp-label,
+.fi-fo-field-wrp-label span {
+    font-size: 1.2rem !important;
+    line-height: 1.35 !important;
 }
 
-.fi-fo-field-wrp-label span,
 .fi-input,
 .fi-select-input,
+.fi-textarea,
 .fi-ta-text,
+.fi-ta-text-item,
 .fi-btn-label,
 .fi-link-label,
 .fi-badge,
-.fi-fo-field-wrp-hint {
-    font-size: 1.05rem !important;
-}
-
-.fi-wi-stats-overview-stat-label {
-    font-size: 1.05rem !important;
+.fi-fo-field-wrp-hint,
+.fi-fo-field-wrp-helper-text,
+.fi-pagination-overview,
+.fi-ta-empty-state-heading,
+.fi-ta-empty-state-description {
+    font-size: 1.15rem !important;
+    line-height: 1.45 !important;
 }
 
 .fi-wi-stats-overview-stat-value {
-    font-size: 2rem !important;
+    font-size: 2.15rem !important;
+}
+
+.fi-wi-stats-overview-stat-description {
+    font-size: 1.05rem !important;
+}
+
+.fi-sidebar-item-button,
+.fi-topbar-item-button {
+    font-size: 1.15rem !important;
 }
 
 .fi-simple-layout {

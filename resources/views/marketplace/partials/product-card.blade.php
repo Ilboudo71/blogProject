@@ -7,7 +7,13 @@
 <article class="product-card">
     <a href="{{ route('marketplace.show', $product) }}" class="product-card-media">
         @if ($product->photo_url)
-            <img src="{{ $product->photo_url }}" alt="{{ $product->name }}" loading="lazy">
+            <img
+                src="{{ $product->photo_url }}"
+                alt="{{ $product->name }}"
+                loading="lazy"
+                onerror="this.style.display='none'; const fb=this.parentElement.querySelector('[data-fallback]'); if(fb){ fb.hidden=false; fb.style.display='grid'; }"
+            >
+            <div class="product-fallback" data-fallback hidden>{{ strtoupper(substr($product->name, 0, 1)) }}</div>
         @else
             <div class="product-fallback">{{ strtoupper(substr($product->name, 0, 1)) }}</div>
         @endif

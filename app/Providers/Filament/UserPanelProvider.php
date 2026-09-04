@@ -49,7 +49,15 @@ class UserPanelProvider extends PanelProvider
             ])
             ->renderHook(
                 PanelsRenderHook::STYLES_AFTER,
-                fn (): string => Blade::render('@vite(\'resources/css/filament/panel.css\')'),
+                fn (): string => Blade::render('@vite(\'resources/css/filament/panel.css\')').
+                    '<style id="raaga-panel-type-scale">
+                        html.fi, .fi-body, .fi-main, .fi-page { font-size: 18px !important; }
+                        .fi-sidebar-item-label, .fi-sidebar-group-label, .fi-topbar-item-label { font-size: 1.15rem !important; }
+                        .fi-header-heading { font-size: 2rem !important; }
+                        .fi-section-header-heading, .fi-fo-field-wrp-label span, .fi-btn-label, .fi-input, .fi-select-input, .fi-ta-text { font-size: 1.15rem !important; }
+                        .fi-wi-stats-overview-stat-value { font-size: 2.15rem !important; }
+                        .fi-wi-stats-overview-stat-label { font-size: 1.2rem !important; }
+                    </style>',
             )
             ->renderHook(
                 PanelsRenderHook::SIDEBAR_FOOTER,

@@ -56,5 +56,10 @@
     "Supprimer": "Supprimer",
     "Publier un produit": "Publier un produit",
     "Ajoutez une nouvelle annonce depuis votre accueil.": "Ajoutez une nouvelle annonce depuis votre accueil.",
-    "Limite atteinte : passez en Premium pour publier davantage.": "Limite atteinte : passez en Premium pour publier davantage."
+    "Limite atteinte : passez en Premium pour publier davantage.": "Limite atteinte : passez en Premium pour publier davantage.",
+    "Image trop volumineuse (max. 20 Mo).": "Image trop volumineuse (max. 20 Mo).",
+    "Echec du chargement de la photo. Reessayez.": "Echec du chargement de la photo. Reessayez.",
+    "Photo mise a jour.": "Photo mise a jour.",
+    "Envoi...": "Envoi...",
+    "Formats: JPG, PNG, WEBP, GIF. Max 20 Mo. Cliquez Modifier pour changer la photo.": "Formats: JPG, PNG, WEBP, GIF. Max 20 Mo. Cliquez Modifier pour changer la photo."
 }

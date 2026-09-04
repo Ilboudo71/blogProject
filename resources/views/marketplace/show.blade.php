@@ -14,7 +14,12 @@
         <div class="detail-media">
             <div class="detail-media-frame">
                 @if ($product->photo_url)
-                    <img src="{{ $product->photo_url }}" alt="{{ $product->name }}">
+                    <img
+                        src="{{ $product->photo_url }}"
+                        alt="{{ $product->name }}"
+                        onerror="this.style.display='none'; const fb=this.parentElement.querySelector('[data-fallback]'); if(fb){ fb.hidden=false; fb.style.display='grid'; }"
+                    >
+                    <div class="product-fallback large" data-fallback hidden>{{ strtoupper(substr($product->name, 0, 1)) }}</div>
                 @else
                     <div class="product-fallback large">{{ strtoupper(substr($product->name, 0, 1)) }}</div>
                 @endif
