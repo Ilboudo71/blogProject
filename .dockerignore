@@ -19,8 +19,12 @@ yarn-error.log
 .git
 .ddev
 .cursor
+.vercel
 tests
 .phpunit.cache
 README.md
 /conf
 /scripts
+Dockerfile
+render.yaml
+docker

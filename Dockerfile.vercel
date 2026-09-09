@@ -1,0 +1,83 @@
+# Frontend assets (Vite)
+FROM node:22-bookworm-slim AS assets
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY vite.config.js ./
+COPY resources ./resources
+COPY public ./public
+RUN npm run build
+
+# PHP extensions + FrankenPHP base
+FROM dunglas/frankenphp:1-php8.4-bookworm AS base
+
+RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    && install-php-extensions \
+        intl \
+        zip \
+        gd \
+        pdo_pgsql \
+        pgsql \
+        bcmath \
+        mbstring \
+        opcache \
+        pcntl \
+    && printf "upload_max_filesize=20M\npost_max_size=20M\nmemory_limit=256M\nmax_execution_time=60\n" \
+        > "$PHP_INI_DIR/conf.d/zz-uploads.ini"
+
+WORKDIR /app
+
+# Composer dependencies + app
+FROM base AS dependencies
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY composer.json composer.lock ./
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --no-progress \
+    --no-scripts \
+    --optimize-autoloader \
+    --prefer-dist
+
+COPY . .
+COPY --from=assets /app/public/build /app/public/build
+
+# Dummy key for build-time artisan only (real APP_KEY comes from Vercel env at runtime).
+ENV APP_KEY=base64:dGVtcG9yYXJ5LWJ1aWxkLWtleS1ub3QtZm9yLXByb2Q= \
+    APP_ENV=production \
+    APP_DEBUG=false
+
+RUN mkdir -p \
+        storage/framework/cache \
+        storage/framework/sessions \
+        storage/framework/views \
+        storage/logs \
+        storage/app/public \
+        bootstrap/cache \
+    && composer dump-autoload --no-dev --classmap-authoritative \
+    && php artisan event:cache \
+    && php artisan view:cache \
+    && php artisan filament:assets || true
+
+# Runtime
+FROM base AS runtime
+
+COPY --from=dependencies --chown=www-data:www-data /app /app
+COPY --chown=www-data:www-data Caddyfile /etc/frankenphp/Caddyfile
+
+RUN setcap CAP_NET_BIND_SERVICE=+eip /usr/local/bin/frankenphp \
+    && chown -R www-data:www-data /config/caddy /data/caddy \
+    && chown -R www-data:www-data /app/storage /app/bootstrap/cache
+
+# Do NOT bake APP_KEY / DB credentials into the image.
+# Sessions/cache must use an external store (database/redis) in Vercel env.
+ENV PORT=80 \
+    APP_ENV=production \
+    APP_DEBUG=false \
+    LOG_CHANNEL=stderr \
+    QUEUE_CONNECTION=sync
+
+USER www-data
+
+CMD ["frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile"]
